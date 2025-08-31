@@ -1,8 +1,10 @@
-import Modal from "@components/common/Modal";
+import Badge from "@components/common/Badge";
 function App() {
   return (
     <>
-      <Modal contents="안녕" />
+      <Badge>
+        <div>안녕</div>
+      </Badge>
     </>
   );
 }
