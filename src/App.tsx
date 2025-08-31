@@ -1,9 +1,9 @@
-import LogoHeader from "@components/common/LogoHeader";
+import Header from "@components/common/Header";
 
 function App() {
   return (
     <>
-      <LogoHeader />
+      <Header />
     </>
   );
 }
