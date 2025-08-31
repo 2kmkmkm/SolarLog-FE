@@ -1,8 +1,8 @@
-import LabelInput from "@components/common/signup/LabelInput";
+import LoginInput from "@components/login/LoginInput";
 function App() {
   return (
     <>
-      <LabelInput label="아이디" />
+      <LoginInput icon="material-symbols:person-rounded" placeholder="ID" />
     </>
   );
 }
