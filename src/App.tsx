@@ -1,9 +1,8 @@
-import Input from "@components/common/Input";
-
+import LabelInput from "@components/common/signup/LabelInput";
 function App() {
   return (
     <>
-      <Input />
+      <LabelInput label="아이디" />
     </>
   );
 }
