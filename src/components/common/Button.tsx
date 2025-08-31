@@ -9,7 +9,7 @@ export default function Button({
 }) {
   return (
     <button
-      className={`w-full body1 flex justify-center items-center ${
+      className={`btn w-full body1 flex justify-center items-center ${
         active ? "bg-main" : "bg-gray"
       } ${modal ? "h-9 max-w-40 rounded-xl" : "h-11 rounded-2xl"}`}
     >

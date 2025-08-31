@@ -44,6 +44,6 @@ input:focus {
   outline: none;
 }
 
-button:hover {
+.btn:hover {
   background-color: #989898;
 }
