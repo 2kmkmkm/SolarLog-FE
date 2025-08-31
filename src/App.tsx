@@ -1,9 +1,9 @@
-import Header from "@components/common/Header";
+import Input from "@components/common/Input";
 
 function App() {
   return (
     <>
-      <Header />
+      <Input />
     </>
   );
 }

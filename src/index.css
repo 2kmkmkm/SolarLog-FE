@@ -39,3 +39,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+input:focus {
+  outline: none;
+}
