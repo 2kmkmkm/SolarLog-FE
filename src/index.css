@@ -43,3 +43,7 @@ html, body {
 input:focus {
   outline: none;
 }
+
+button:hover {
+  background-color: #989898;
+}
