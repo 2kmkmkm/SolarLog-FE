@@ -1,8 +1,9 @@
-import LoginInput from "@components/login/LoginInput";
+import Button from "@components/common/Button";
 function App() {
   return (
     <>
-      <LoginInput icon="material-symbols:person-rounded" placeholder="ID" />
+      <Button label="회원가입" />
+      <Button active={false} label="회원가입" />
     </>
   );
 }

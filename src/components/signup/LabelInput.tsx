@@ -1,4 +1,4 @@
-import Input from "../Input";
+import Input from "../common/Input";
 
 export default function LabelInput({ label }: { label: string }) {
   return (
