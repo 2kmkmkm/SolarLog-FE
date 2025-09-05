@@ -20,6 +20,9 @@
   .body2_bold {
     @apply text-xs font-bold;
   }
+  .body3 {
+    @apply text-[10px] font-medium;
+  }
 }
 
 * {
