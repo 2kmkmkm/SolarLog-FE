@@ -13,7 +13,7 @@ export default function Navigation() {
   const { pathname } = useLocation();
 
   return (
-    <div className="fixed bottom-0 w-full h-14 px-10 bg-white shadow-navigation flex justify-between items-center">
+    <div className="fixed bottom-0 w-full h-[52px] flex-shrink-0 px-10 bg-white shadow-navigation flex justify-between items-center">
       {NavigationList.map((item) => {
         const isSelected = pathname.startsWith(item.path);
         return (
@@ -24,8 +24,8 @@ export default function Navigation() {
               isSelected ? "text-main" : "text-gray"
             }`}
           >
-            <Icon icon={item.icon} className="w-6 h-6 " />
-            <div className="body2">{item.label}</div>
+            <Icon icon={item.icon} className="w-5 h-5" />
+            <div className="body3">{item.label}</div>
           </Link>
         );
       })}

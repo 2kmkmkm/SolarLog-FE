@@ -15,9 +15,15 @@
     @apply text-base font-medium;
   }
   .body2 {
-    @apply text-xs font-medium;
+    @apply text-sm font-medium;
   }
   .body2_bold {
+    @apply text-sm font-bold;
+  }
+  .body3 {
+    @apply text-xs font-medium;
+  }
+  .body3_bold {
     @apply text-xs font-bold;
   }
 }
