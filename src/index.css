@@ -1,4 +1,4 @@
-@import './styles/fonts.css';
+@import "./styles/fonts.css";
 
 @tailwind base;
 @tailwind components;
@@ -31,10 +31,11 @@
 
 html {
   color: #363636;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
-html, body {
+html,
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
