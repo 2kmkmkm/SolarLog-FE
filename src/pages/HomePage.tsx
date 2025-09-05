@@ -4,7 +4,7 @@ import Card from "@components/common/Card";
 
 export default function HomePage() {
   return (
-    <div className="bg-bg pt-5 flex flex-col gap-4">
+    <div className="bg-bg pt-[72px] flex flex-col gap-4 overflow-y">
       <div className="px-4 space-y-4">
         <WeatherBox
           location="광주광역시 북구 용봉동"

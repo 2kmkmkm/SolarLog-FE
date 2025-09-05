@@ -1,14 +1,25 @@
+type ToggleProps = {
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+};
+
 function ToggleItem({
   label,
-  isSelected,
+  selected,
+  onClick,
 }: {
   label: string;
-  isSelected?: boolean;
+  selected: boolean;
+  onClick: () => void;
 }) {
   return (
     <button
-      className={`w-full py-2 flex justify-center items-center rounded-[20px] ${
-        isSelected ? "bg-main text-white" : "bg-white text-gray"
+      type="button"
+      aria-pressed={selected}
+      onClick={onClick}
+      className={`body2 w-full py-1.5 flex justify-center items-center rounded-[20px] ${
+        selected ? "bg-main text-white" : "bg-white text-gray"
       }`}
     >
       {label}
@@ -16,11 +27,21 @@ function ToggleItem({
   );
 }
 
-export default function Toggle() {
+export default function Toggle({ options, value, onChange }: ToggleProps) {
   return (
-    <div className="body2 w-56 bg-white rounded-[20px] shadow-box flex justify-center items-center">
-      <ToggleItem label="일별" isSelected />
-      <ToggleItem label="월별" />
+    <div
+      role="group"
+      aria-label="view toggle"
+      className="body2 w-56 bg-white rounded-[20px] shadow-box flex justify-center items-center"
+    >
+      {options.map((opt) => (
+        <ToggleItem
+          key={opt}
+          label={opt}
+          selected={opt === value}
+          onClick={() => onChange(opt)}
+        />
+      ))}
     </div>
   );
 }
