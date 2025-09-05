@@ -24,8 +24,8 @@ export default function Navigation() {
               isSelected ? "text-main" : "text-gray"
             }`}
           >
-            <Icon icon={item.icon} className="w-6 h-6 " />
-            <div className="body2">{item.label}</div>
+            <Icon icon={item.icon} className="w-5 h-5" />
+            <div className="body3">{item.label}</div>
           </Link>
         );
       })}
