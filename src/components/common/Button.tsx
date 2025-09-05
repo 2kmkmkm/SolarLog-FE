@@ -1,19 +1,20 @@
-export default function Button({
-  active = true,
-  modal = false,
-  label,
-}: {
-  active?: boolean;
+type ButtonProps = {
   modal?: boolean;
   label: string;
-}) {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export default function Button({
+  modal = false,
+  label,
+  ...props
+}: ButtonProps) {
   return (
     <button
-      className={`btn w-full body1 flex justify-center items-center ${
-        active ? "bg-main" : "bg-gray"
-      } ${modal ? "h-9 max-w-40 rounded-xl" : "h-11 rounded-2xl"}`}
+      {...props}
+      className={`btn w-full body1 flex justify-center items-center bg-main disabled:bg-gray
+      ${modal ? "h-9 max-w-40 rounded-xl" : "h-11 rounded-2xl"}`}
     >
-      <div className="text-white">{label}</div>
+      <div className="heading2 text-white">{label}</div>
     </button>
   );
 }
