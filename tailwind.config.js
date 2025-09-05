@@ -10,6 +10,7 @@ export default {
         darkgray: "#636363",
         gray: "#989898",
         lightgray: "#C5C5C5",
+        lightlightgray: "#EFEFEF",
         blue: "#007DF2",
         skyblue: "#3FB6FF",
         green: "#72BC29",
@@ -18,6 +19,7 @@ export default {
         pink: "#FF5C5E",
         black: "#363636",
         white: "#FAFAFA",
+        bg: "#EDEDED",
       },
       boxShadow: {
         input: "0px 2px 10px 0px rgba(0,0,0,0.15)",
