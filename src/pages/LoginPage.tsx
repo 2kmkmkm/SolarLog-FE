@@ -1,8 +1,11 @@
 import Button from "@components/common/Button";
 import LoginInput from "@components/login/LoginInput";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function LoginPage() {
+  const nav = useNavigate();
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,7 +41,12 @@ export default function LoginPage() {
           </div>
           <div className="flex flex-col gap-2 items-center">
             <Button label="로그인" type="submit" />
-            <span className="body2_bold text-lightgray">회원가입</span>
+            <button
+              className="body2_bold text-lightgray"
+              onClick={() => nav("/singup")}
+            >
+              회원가입
+            </button>
           </div>
         </form>
       </div>
