@@ -17,7 +17,7 @@ export default function NotificationItem({
     <button
       onClick={() => nav(`/detection/${alarmId}`)}
       className={`${
-        isRead && "opacity-50"
+        isRead && "opacity-70 hover:opacity-30"
       } bg-white p-3 flex flex-col gap-2 rounded-[10px]`}
     >
       <div className="flex justify-between">

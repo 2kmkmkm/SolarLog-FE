@@ -19,7 +19,7 @@ export default function Row({ label, num, unit, status }: RowProps) {
           <span className="body2 text-darkgray">{unit}</span>
         </div>
         {status && (
-          <div className="bg-bg rounded px-1 h-4 flex text-center">
+          <div className="bg-bg rounded-md px-1 py-0.5 flex items-center justify-center">
             <span className={`body3_bold ${statusColor}`}>⦁ {status}</span>
           </div>
         )}

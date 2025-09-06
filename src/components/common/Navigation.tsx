@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const NavigationList = [
-  { icon: "basil:sun-outline", label: "내 패널", path: "/home" },
+  { icon: "basil:sun-outline", label: "홈", path: "/home" },
   { icon: "iconoir:graph-up", label: "통계", path: "/analysis" },
   { icon: "mynaui:bell", label: "알림", path: "/notification" },
   { icon: "iconoir:profile-circle", label: "My", path: "/my" },
@@ -20,7 +20,7 @@ export default function Navigation() {
           <Link
             key={item.label}
             to={item.path}
-            className={`w-9 flex flex-col justify-center items-center gap-0.5 ${
+            className={`hover:opacity-70 w-9 flex flex-col justify-center items-center gap-0.5 ${
               isSelected ? "text-main" : "text-gray"
             }`}
           >

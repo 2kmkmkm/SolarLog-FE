@@ -8,6 +8,7 @@ import NotificationPage from "@pages/NotificationPage";
 import MyPage from "@pages/MyPage";
 import Layout from "@components/common/Layout";
 import DetectionPage from "@pages/DetectionPage";
+import NotFoundPage from "@pages/NotFoundPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/detection/:alarmId" element={<DetectionPage />} />
+        <Route path="/notfound" element={<NotFoundPage />} />
       </Routes>
     </>
   );
