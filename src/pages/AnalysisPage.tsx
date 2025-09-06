@@ -8,7 +8,7 @@ export default function AnalysisPage() {
   const [selectedLabel, setSelectedLabel] = useState<"일별" | "월별">("일별");
 
   return (
-    <div className="bg-bg pt-[72px] flex flex-col items-center gap-5 overflow-y">
+    <div className="pt-4 flex flex-col items-center gap-4 flex-1">
       <Toggle
         options={["일별", "월별"]}
         value={selectedLabel}

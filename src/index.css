@@ -1,4 +1,4 @@
-@import "./styles/fonts.css";
+@import "pretendard/dist/web/static/pretendard.css";
 
 @tailwind base;
 @tailwind components;
@@ -24,7 +24,7 @@
     @apply text-xs font-medium;
   }
   .body3_bold {
-    @apply text-xs font-bold;
+    @apply text-xs font-semibold;
   }
 }
 

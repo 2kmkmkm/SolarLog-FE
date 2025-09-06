@@ -42,7 +42,7 @@ export default function LoginPage() {
           <div className="flex flex-col gap-2 items-center">
             <Button label="로그인" type="submit" />
             <button
-              className="body2_bold text-lightgray"
+              className="body3_bold text-lightgray"
               onClick={() => nav("/signup")}
             >
               회원가입

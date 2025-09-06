@@ -18,7 +18,7 @@ function ToggleItem({
       type="button"
       aria-pressed={selected}
       onClick={onClick}
-      className={`body2 w-full py-1.5 flex justify-center items-center rounded-[20px] ${
+      className={`body3 w-full py-1.5 flex justify-center items-center rounded-[20px] ${
         selected ? "bg-main text-white" : "bg-white text-gray"
       }`}
     >
