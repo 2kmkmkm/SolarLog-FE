@@ -6,7 +6,9 @@ export default function Layout() {
   return (
     <>
       <LogoHeader />
-      <Outlet />
+      <div className="flex flex-col flex-1 bg-bg w-full min-h-screen py-[52px] overflow-y">
+        <Outlet />
+      </div>
       <Navigation />
     </>
   );

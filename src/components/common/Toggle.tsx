@@ -16,9 +16,8 @@ function ToggleItem({
   return (
     <button
       type="button"
-      aria-pressed={selected}
       onClick={onClick}
-      className={`body2 w-full py-1.5 flex justify-center items-center rounded-[20px] ${
+      className={`body3 w-full py-1.5 flex justify-center items-center rounded-[20px] ${
         selected ? "bg-main text-white" : "bg-white text-gray"
       }`}
     >
@@ -29,11 +28,7 @@ function ToggleItem({
 
 export default function Toggle({ options, value, onChange }: ToggleProps) {
   return (
-    <div
-      role="group"
-      aria-label="view toggle"
-      className="body2 w-56 bg-white rounded-[20px] shadow-box flex justify-center items-center"
-    >
+    <div className="body2 w-56 bg-white rounded-[20px] shadow-box flex justify-center items-center">
       {options.map((opt) => (
         <ToggleItem
           key={opt}

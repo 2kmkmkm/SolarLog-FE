@@ -109,7 +109,7 @@ export default function SignupPage() {
                 required
               />
               {isMisMatched && (
-                <span className="body2 text-red ml-1">
+                <span className="body3 text-red ml-1">
                   비밀번호가 일치하지 않습니다
                 </span>
               )}
@@ -163,7 +163,7 @@ export default function SignupPage() {
               />
               {isPostCodeOpen && (
                 <AddressModal
-                  open={isPostCodeOpen}
+                  isOpen={isPostCodeOpen}
                   onClose={() => setIsPostCodeOpen(false)}
                   onSelect={(addr) =>
                     setForm((prev) => ({ ...prev, installLocation: addr }))
