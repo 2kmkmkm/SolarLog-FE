@@ -1,17 +1,21 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type { notificationType } from "../../types/notificationType";
 import { formatIsoToDayOfWeekTime } from "@utils/DateUtils";
+import { useNavigate } from "react-router-dom";
 
 export default function NotificationItem({
+  alarmId,
   eventType,
   modelName,
   alarmDate,
   isRead = false,
 }: notificationType) {
+  const nav = useNavigate();
   const date = formatIsoToDayOfWeekTime(alarmDate);
 
   return (
     <button
+      onClick={() => nav(`/detection/${alarmId}`)}
       className={`${
         isRead && "opacity-50"
       } bg-white p-3 flex flex-col gap-2 rounded-[10px]`}
