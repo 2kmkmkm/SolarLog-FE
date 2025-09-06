@@ -1,4 +1,3 @@
-// AddressModal.tsx
 import DaumPostCode from "react-daum-postcode";
 import { useOutsideClick } from "@hooks/useOutsideclick";
 import { useRef, useEffect } from "react";
@@ -22,8 +21,6 @@ export function AddressModal({ isOpen, onClose, onSelect }: AddressModalProps) {
   }, [isOpen]);
 
   if (!isOpen) return null;
-
-  if (!open) return null;
 
   return (
     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">

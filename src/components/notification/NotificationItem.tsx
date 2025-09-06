@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type { notificationType } from "../../types/notificationType";
-import { formatIsoToDayOfWeekTime } from "@utils/DateUtils";
 import { useNavigate } from "react-router-dom";
+import { formatIsoToDayOfWeekTime } from "@utils/dateUtils";
 
 export default function NotificationItem({
   alarmId,
