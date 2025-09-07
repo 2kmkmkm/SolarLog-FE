@@ -10,7 +10,7 @@ type AddressModalProps = {
 
 export function AddressModal({ isOpen, onClose, onSelect }: AddressModalProps) {
   const ref = useRef<HTMLDivElement>(null);
-  useOutsideClick(ref, onClose);
+  useOutsideClick([ref], onClose);
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";

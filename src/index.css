@@ -21,7 +21,7 @@
     @apply text-sm font-bold;
   }
   .body3 {
-    @apply text-xs font-medium;
+    @apply text-xs font-normal;
   }
   .body3_bold {
     @apply text-xs font-semibold;

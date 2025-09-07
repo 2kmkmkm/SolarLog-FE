@@ -15,11 +15,11 @@ export default function MyPage() {
       <div className="flex justify-between items-center">
         <div className="flex items-end">
           <span className="heading1 text-sub">02dlrudals</span>
-          <span className="body1 text-darkgray">님, 안녕하세요!</span>
+          <span className="body1 text-darkgray pb-0.5">님, 안녕하세요!</span>
         </div>
         {/* 로그아웃 로직 추가 */}
         <Badge onClick={handleLogoutClick}>
-          <span className="body3 text-gray">로그아웃</span>
+          <span className="body3_bold text-gray">로그아웃</span>
         </Badge>
       </div>
       <Box>
@@ -27,8 +27,8 @@ export default function MyPage() {
         <Row label="모델명" unit="LG NeON R 405W" />
         <Row label="제조사" unit="LG Solar" />
         <Row label="시리얼 넘버" unit="LGNR405-JP-A9823746" />
-        <Row label="성능 저하율" unit="98.9%" status="정상" />
-        <Row label="잔여 수명" unit="2y 1m" />
+        <Row label="성능" unit="98.9%" status="정상" />
+        <Row label="잔여 수명" unit="2y 1m" info="잔여 수명 공식 추후에 추가" />
       </Box>
       <Box>
         <div className="heading1 text-sub">설치 정보</div>

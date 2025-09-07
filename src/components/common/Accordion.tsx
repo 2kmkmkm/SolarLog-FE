@@ -19,7 +19,7 @@ export default function Accordion({ title, children }: AccordionProps) {
         <Icon
           icon="ion:chevron-back"
           className={`text-darkgray w-5 h-5 rotate transform transition-transform duration-300 ${
-            isOpen ? "-rotate-90" : "rotate-90"
+            isOpen ? "rotate-90" : "-rotate-90"
           }`}
         />
       </button>

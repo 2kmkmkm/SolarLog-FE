@@ -32,7 +32,12 @@ export default function Monthly() {
         <Row label="최고 출력 일자" num={13} unit="시" />
         <Row label="최고 출력량" num={11.4} unit="kW" />
         <Row label="총 발전량" num={43.1} unit="kW" />
-        <Row label="CO₂ 절감량" num={0.01} unit="kg" />
+        <Row
+          label="CO₂ 절감량"
+          num={0.01}
+          unit="kg"
+          info="발전량(kWh) × 배출계수(kgCO₂/kWh)"
+        />
       </GreenBox>
     </div>
   );
