@@ -6,6 +6,7 @@ import { formatIsoToDayOfWeekTime } from "@utils/dateUtils";
 export default function NotificationItem({
   alarmId,
   eventType,
+  eventDetail,
   modelName,
   alarmDate,
   isRead = false,
@@ -33,7 +34,7 @@ export default function NotificationItem({
       <div className="flex whitespace-nowrap  w-full">
         <span className="body2_bold text-green">{modelName}</span>
         <span className="body2 text-darkgray truncate">
-          에 ~~한 {eventType}이 감지되었습니다
+          에 {eventDetail} {eventType}이 감지되었습니다
         </span>
       </div>
     </button>

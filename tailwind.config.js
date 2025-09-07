@@ -25,7 +25,7 @@ export default {
         input: "0px 2px 10px 0px rgba(0,0,0,0.05)",
         navigation: "0px -2px 20px 0px rgba(0,0,0,0.05)",
         header: "0px 2px 20px 0px rgba(0,0,0,0.0.05)",
-        box: "0px 2px 50px 0px rgba(0,0,0,0.0.1)",
+        box: "0px 2px 50px 0px rgba(0,0,0,0.1)",
       },
     },
   },

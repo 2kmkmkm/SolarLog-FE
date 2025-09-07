@@ -28,7 +28,7 @@ function ToggleItem({
 
 export default function Toggle({ options, value, onChange }: ToggleProps) {
   return (
-    <div className="body2 w-56 bg-white rounded-[20px] shadow-box flex justify-center items-center">
+    <div className="body2 w-56 bg-white rounded-[20px] shadow-header flex justify-center items-center">
       {options.map((opt) => (
         <ToggleItem
           key={opt}

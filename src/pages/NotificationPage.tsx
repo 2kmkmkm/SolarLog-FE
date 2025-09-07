@@ -7,6 +7,7 @@ const list: notificationType[] = [
     alarmDate: "2025-04-05T10:15:00Z",
     modelName: "LG NeON R 405W",
     eventType: "결함",
+    eventDetail: "전기적",
     isRead: true,
   },
   {
@@ -14,6 +15,7 @@ const list: notificationType[] = [
     alarmDate: "2025-04-12T14:30:00Z",
     modelName: "Hanwha Q.PEAK DUO 400W",
     eventType: "오염",
+    eventDetail: "조류 배설물",
     isRead: false,
   },
   {
@@ -21,6 +23,7 @@ const list: notificationType[] = [
     alarmDate: "2025-04-18T09:00:00Z",
     modelName: "LG NeON H 390W",
     eventType: "결함",
+    eventDetail: "물리적",
     isRead: false,
   },
   {
@@ -28,6 +31,7 @@ const list: notificationType[] = [
     alarmDate: "2025-04-25T16:45:00Z",
     modelName: "JA Solar DeepBlue 410W",
     eventType: "오염",
+    eventDetail: "눈",
     isRead: true,
   },
   {
@@ -35,6 +39,7 @@ const list: notificationType[] = [
     alarmDate: "2025-04-28T08:20:00Z",
     modelName: "LG NeON R 405W",
     eventType: "결함",
+    eventDetail: "전기적",
     isRead: true,
   },
   {
@@ -42,6 +47,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-02T11:10:00Z",
     modelName: "Hanwha Q.PEAK DUO 400W",
     eventType: "오염",
+    eventDetail: "먼지",
     isRead: false,
   },
   {
@@ -49,6 +55,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-07T13:00:00Z",
     modelName: "JA Solar DeepBlue 410W",
     eventType: "결함",
+    eventDetail: "물리적",
     isRead: false,
   },
   {
@@ -56,6 +63,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-10T15:40:00Z",
     modelName: "LG NeON H 390W",
     eventType: "오염",
+    eventDetail: "조류 배설물",
     isRead: true,
   },
   {
@@ -63,6 +71,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-15T09:25:00Z",
     modelName: "LG NeON R 405W",
     eventType: "결함",
+    eventDetail: "전기적",
     isRead: false,
   },
   {
@@ -70,6 +79,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-20T18:55:00Z",
     modelName: "Hanwha Q.PEAK DUO 400W",
     eventType: "오염",
+    eventDetail: "눈",
     isRead: true,
   },
   {
@@ -77,6 +87,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-23T07:30:00Z",
     modelName: "JA Solar DeepBlue 410W",
     eventType: "결함",
+    eventDetail: "물리적",
     isRead: true,
   },
   {
@@ -84,6 +95,7 @@ const list: notificationType[] = [
     alarmDate: "2025-05-29T12:05:00Z",
     modelName: "LG NeON H 390W",
     eventType: "오염",
+    eventDetail: "먼지",
     isRead: false,
   },
 ];
