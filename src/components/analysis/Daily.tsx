@@ -1,7 +1,7 @@
 import Badge from "@components/common/Badge";
 import GreenBox from "@components/common/GreenBox";
 import Row from "@components/common/Row";
-import Calendar from "./CalendarModal";
+import DailyCalendar from "./DailyCalendar";
 import { useState } from "react";
 import { subDays } from "date-fns";
 
@@ -12,7 +12,7 @@ export default function Daily() {
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full justify-center">
-          <Calendar
+          <DailyCalendar
             currentDate={selectedDate}
             setCurrentDate={setSelectedDate}
           />

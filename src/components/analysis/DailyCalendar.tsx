@@ -1,3 +1,4 @@
+import { useOutsideClick } from "@hooks/useOutsideclick";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   format,
@@ -11,16 +12,18 @@ import {
   isSameMonth,
   subMonths,
   addMonths,
+  subDays,
 } from "date-fns";
 import {
   useCallback,
   useMemo,
   useState,
+  useRef,
   type Dispatch,
   type SetStateAction,
 } from "react";
 
-export default function Calendar({
+export default function DailyCalendar({
   currentDate,
   setCurrentDate,
 }: {
@@ -29,7 +32,15 @@ export default function Calendar({
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // 어제 날짜
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick([modalRef], () => setIsOpen(false));
+
+  const today = new Date();
+  const yesterday = subDays(today, 1);
+  const currentYear = today.getFullYear();
+  const currentMonthIndex = today.getMonth(); // 이전 달
+
   const monthStart = startOfMonth(currentDate); // 현재 달의 시작 날짜
   const monthEnd = endOfMonth(currentDate); // 현재 달의 마지막 날짜
 
@@ -53,19 +64,24 @@ export default function Calendar({
     return monthArray;
   }, [startDate, endDate]);
 
-  // 이전 일로 이동
+  // 이전 달로 이동
   const handlePrevMonth = useCallback(() => {
     setCurrentDate(subMonths(currentDate, 1));
-  }, [currentDate]);
+  }, [currentDate, setCurrentDate]);
 
-  // 다음 일로 이동
+  // 다음 달로 이동
   const handleNextMonth = useCallback(() => {
-    setCurrentDate(addMonths(currentDate, 1));
-  }, [currentDate]);
+    if (
+      currentDate.getFullYear() < currentYear ||
+      (currentDate.getFullYear() === currentYear &&
+        currentDate.getMonth() < currentMonthIndex)
+    )
+      setCurrentDate(addMonths(currentDate, 1));
+  }, [currentDate, setCurrentDate, currentYear, currentMonthIndex]);
 
-  const currentYear = format(currentDate, "yyyy년");
-  const currentMonth = format(currentDate, "M월");
-  const currnetDay = format(currentDate, "d일");
+  const selectedYear = format(currentDate, "yyyy년");
+  const selectedMonth = format(currentDate, "M월");
+  const selectedDay = format(currentDate, "d일");
 
   return (
     <div className="relative flex items-center gap-3 w-full justify-center">
@@ -76,21 +92,33 @@ export default function Calendar({
         className="body1 text-darkgray"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {currentYear} {currentMonth} {currnetDay}
+        {selectedYear} {selectedMonth} {selectedDay}
       </button>
-      <button onClick={handleNextMonth}>
+      <button
+        onClick={handleNextMonth}
+        disabled={
+          currentDate.getFullYear() === currentYear &&
+          currentDate.getMonth() === currentMonthIndex
+        }
+        className={`${
+          currentDate.getFullYear() === currentYear &&
+          currentDate.getMonth() === currentMonthIndex
+            ? "opacity-40 cursor-not-allowed"
+            : ""
+        }`}
+      >
         <Icon
           icon="ion:chevron-back"
           className="w-4 h-4 text-gray scale-x-[-1]"
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full z-50 mt-2 bg-white">
+        <div className="absolute top-full z-50 mt-2 shadow-modal rounded-xl bg-white">
           <div className="grid grid-cols-7 w-64 overflow-hidden rounded-xl">
             {weekMock.map((day, idx) => {
-              let colorClass = "text-darkgray";
-              if (idx === 0) colorClass = "text-red bg-bg";
-              else if (idx === 6) colorClass = "text-blue bg-bg";
+              let colorClass = "text-darkgray bg-white";
+              if (idx === 0) colorClass = "text-red bg-lightlightgray";
+              else if (idx === 6) colorClass = "text-blue bg-lightlightgray";
 
               return (
                 <div
@@ -103,22 +131,33 @@ export default function Calendar({
             })}
             {createMonth.map((day, index) => {
               const isCurrentMonth = isSameMonth(day, monthStart); // 현재 날짜의 일자인지 확인
-              const isSelected = currentDate && isSameDay(day, currentDate);
-              const dayOfWeek = day.getDay();
+              const isSelected = currentDate && isSameDay(day, currentDate); // 같은 연/월/일인지 확인
+              const dayOfWeek = day.getDay(); // 요일을 숫자로 변환 0~6
 
-              let bgColor = "";
-              if (dayOfWeek === 0 || dayOfWeek === 6) bgColor = "bg-bg";
+              const isFuture = day > yesterday;
+
+              let bgColor = "bg-white";
+              if (dayOfWeek === 0 || dayOfWeek === 6)
+                bgColor = "bg-lightlightgray";
 
               return (
                 <button
                   key={index}
-                  onClick={() => setCurrentDate(day)}
-                  className={`p-1.5 ${bgColor} `}
+                  onClick={() => {
+                    if (!isFuture) {
+                      setCurrentDate(day);
+                      setIsOpen(false);
+                    }
+                  }}
+                  disabled={isFuture}
+                  className={`p-1.5 ${bgColor} ${
+                    isCurrentMonth ? "text-darkgray" : "text-lightgray"
+                  } ${isFuture ? "text-lightgray cursor-not-allowed" : ""}`}
                 >
                   <div
                     className={`body2 text-center ${
-                      isCurrentMonth ? "text-darkgray" : "text-lightgray"
-                    } ${isSelected ? "bg-blue rounded-full text-white" : ""}`}
+                      isSelected ? "bg-blue rounded-full text-white" : ""
+                    }`}
                   >
                     {format(day, "d")}
                   </div>
