@@ -1,24 +1,21 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import Badge from "@components/common/Badge";
 import GreenBox from "@components/common/GreenBox";
 import Row from "@components/common/Row";
+import DailyCalendar from "./DailyCalendar";
+import { useState } from "react";
+import { subDays } from "date-fns";
 
 export default function Daily() {
+  const [selectedDate, setSelectedDate] = useState(subDays(new Date(), 1));
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full justify-center">
-          {/* 캘린더 기능 추가 */}
-          <button>
-            <Icon icon="ion:chevron-back" className="w-4 h-4 text-gray" />
-          </button>
-          <button className="body1 text-darkgray">2025년 9월 29일</button>
-          <button>
-            <Icon
-              icon="ion:chevron-back"
-              className="w-4 h-4 text-gray scale-x-[-1]"
-            />
-          </button>
+          <DailyCalendar
+            currentDate={selectedDate}
+            setCurrentDate={setSelectedDate}
+          />
         </div>
         <div className="w-full h-44 border"></div>
       </div>
