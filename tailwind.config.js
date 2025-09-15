@@ -28,6 +28,15 @@ export default {
         box: "0px 2px 50px 0px rgba(0,0,0,0.1)",
         modal: "0px 2px 20px 0px rgba(0,0,0,0.1)",
       },
+      keyframes: {
+        spinOnce: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        spinOnce: "spinOnce 1s linear",
+      },
     },
   },
   plugins: [],

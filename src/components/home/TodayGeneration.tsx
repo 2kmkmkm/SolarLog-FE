@@ -2,6 +2,8 @@ import Box from "@components/common/Box";
 import GreenBox from "@components/common/GreenBox";
 import Row from "@components/common/Row";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { formatIsoToMonthDayTime } from "@utils/dateUtils";
+import { useState } from "react";
 
 type TodayGenerationProps = {
   power: number;
@@ -14,6 +16,18 @@ export default function TodayGeneration({
   totalDailyPower,
   cumulativePower,
 }: TodayGenerationProps) {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [rotating, setRotating] = useState(false);
+
+  const dateTime = formatIsoToMonthDayTime(currentTime);
+
+  const handleTimeClick = () => {
+    const time = new Date();
+    setRotating(true);
+    setTimeout(() => setRotating(false), 1000);
+    setCurrentTime(time);
+  };
+
   return (
     <Box>
       <div className="flex justify-between items-center">
@@ -21,12 +35,13 @@ export default function TodayGeneration({
           <Icon icon="game-icons:electric" className="text-sub w-5 h-5" />
           <span className="heading2 text-sub">오늘의 발전</span>
         </div>
-        <button className="flex items-center gap-1">
-          {/* 실시간 렌더링 추가 */}
-          <span className="body3 text-gray">8.21 12:40</span>
+        <button className="flex items-center gap-1" onClick={handleTimeClick}>
+          <span className="body3 text-gray">{dateTime}</span>
           <Icon
             icon="ion:refresh-circle-outline"
-            className="text-gray w-4 h-4"
+            className={`text-gray w-4 h-4 ${
+              rotating ? "animate-spinOnce" : ""
+            }`}
           />
         </button>
       </div>
