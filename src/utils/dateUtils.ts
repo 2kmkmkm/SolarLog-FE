@@ -36,7 +36,7 @@ export function formatIsoToDotDay(iso: string): string {
   return `${year}.${month}.${day} (${korean})`;
 }
 
-export function formatIsoToMonthDayTime(iso: string): string {
+export function formatIsoToMonthDayTime(iso: Date): string {
   const date = new Date(iso);
 
   const month = date.getMonth() + 1;
