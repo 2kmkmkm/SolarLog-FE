@@ -10,6 +10,11 @@ export default function MyPage() {
     // 로그아웃 로직 추가
     nav("/login");
   };
+
+  // let status = "교체 필요";
+  // if (capability >= 75) capability = "정상";
+  // else if (capability >= 65) capability = "주의";
+
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between items-center">
