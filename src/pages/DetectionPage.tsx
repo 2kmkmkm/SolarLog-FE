@@ -2,12 +2,22 @@ import Accordion from "@components/common/Accordion";
 import Header from "@components/common/Header";
 import Row from "@components/common/Row";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { formatIsoToDotDay } from "@utils/dateUtils";
 
 export default function DetectionPage() {
   return (
     <>
       <Header title="결함 감지" />
       <div className="flex flex-col p-4 gap-4">
+        <div className="flex flex-col gap-1">
+          <div className="heading2 text-darkgray text-center">
+            {formatIsoToDotDay("2025-06-15")}
+          </div>
+          <div className="body2 text-darkgray text-center">
+            패널에 <span className="text-red">전기적 결함</span>이 발생했습니다.
+          </div>
+        </div>
+
         <div className="w-full h-64 bg-bg flex items-center justify-center">
           <Icon icon="mdi-light:image" className="w-6 h-6 text-gray" />
         </div>
