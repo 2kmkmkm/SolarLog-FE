@@ -9,6 +9,7 @@ import MyPage from "@pages/MyPage";
 import Layout from "@components/common/Layout";
 import DetectionPage from "@pages/DetectionPage";
 import NotFoundPage from "@pages/NotFoundPage";
+import LoadingScreen from "@components/common/LoadingScreen";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/detection/:alarmId" element={<DetectionPage />} />
         <Route path="/notfound" element={<NotFoundPage />} />
       </Routes>
+      <LoadingScreen />
     </>
   );
 }
