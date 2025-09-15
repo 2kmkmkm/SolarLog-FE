@@ -8,7 +8,9 @@
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@apis/*": ["src/apis/*"]
+      "@apis/*": ["src/apis/*"],
+      "@app/*": ["src/app/*"],
+      "@features/*": ["src/features/*"]
     },
 
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
