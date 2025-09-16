@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
@@ -27,7 +27,7 @@ function App() {
       dispatch(
         setToken({
           token,
-          userId: payload.userId,
+          userId: payload.sub,
           installLocation: payload.installLocation,
         })
       );
@@ -43,6 +43,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/analysis" element={<AnalysisPage />} />
             <Route path="/notification" element={<NotificationPage />} />

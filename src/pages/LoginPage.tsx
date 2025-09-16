@@ -7,7 +7,6 @@ import { login } from "@features/authThunk";
 
 export default function LoginPage() {
   const nav = useNavigate();
-
   const dispatch = useAppDispatch();
 
   const [userId, setId] = useState("");

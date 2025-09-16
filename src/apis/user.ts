@@ -10,7 +10,7 @@ export const postLogin = (userId: string, password: string) =>
 
 export const postSignup = (
   formData: accountType & panelInfoType & installInfoType
-) => instance.post("/signup", { formData });
+) => instance.post("/signup", formData);
 
-export const postCheckedId = (userId: string) =>
-  instance.post(`/signup/check-id?userId=${userId}`);
+export const getCheckedId = (userId: string) =>
+  instance.get(`/signup/check-id?userId=${userId}`);

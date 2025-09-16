@@ -12,7 +12,6 @@ export default function WeatherBox({ location }: { location: string }) {
         const { lat, lon } = await getCoordsFromAddress(location);
         const weatherData = await getWeather(lat, lon);
         setWeather(weatherData);
-        console.log(weather);
       } catch (err) {
         console.error(err);
       }
