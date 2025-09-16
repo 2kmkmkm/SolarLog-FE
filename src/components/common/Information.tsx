@@ -12,7 +12,7 @@ export default function Information({ contents }: { contents: string }) {
   return (
     <div className="relative flex items-center">
       <button ref={buttonRef} onClick={() => setIsOpen((prev) => !prev)}>
-        <Icon icon="fluent:info-24-regular" className="w-4 h-4 text-gray" />
+        <Icon icon="fluent:info-24-regular" className="w-3.5 h-3.5 text-gray" />
       </button>
       {isOpen && (
         <div

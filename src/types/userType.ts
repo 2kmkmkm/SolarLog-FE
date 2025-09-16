@@ -9,8 +9,16 @@ export type panelInfoType = {
   serialNum: string;
 };
 
-export type installInfoType = {
+export type panelDetailInfoType = {
+  capability: number;
+  leftLife: number;
+}
+
+export type panelType = panelInfoType & panelDetailInfoType;
+
+export type installationInfoType = {
   installDate: string;
   installLocation: string;
   initialPower: number | string;
 };
+
