@@ -13,4 +13,4 @@ export const postSignup = (
 ) => instance.post("/signup", formData).then((res)=>res.data);
 
 export const getCheckedId = (userId: string) =>
-  instance.get(`/signup/check-id?userId=${userId}`).then((res)=>res.data);
+  instance.get("/signup/check-id", {params: {userId}}).then((res)=>res.data);
