@@ -12,5 +12,5 @@ export type panelInfoType = {
 export type installInfoType = {
   installDate: string;
   installLocation: string;
-  initialPower: number;
+  initialPower: number | string;
 };
