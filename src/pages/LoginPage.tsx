@@ -2,9 +2,13 @@ import Button from "@components/common/Button";
 import LoginInput from "@components/login/LoginInput";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
+import { useAppDispatch } from "@hooks/useRedux";
+import { login } from "@features/authThunk";
 
 export default function LoginPage() {
   const nav = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const [userId, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +17,7 @@ export default function LoginPage() {
   const userIdRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (userId.trim() === "") {
@@ -25,10 +29,16 @@ export default function LoginPage() {
       passwordRef.current?.focus();
       return;
     }
-    // 실제 에러
-    setError("아이디 또는 비밀번호가 올바르지 않습니다");
 
-    // Handle login logic here
+    try {
+      const res = await dispatch(login({ userId, password })).unwrap();
+
+      if (res.success) {
+        nav("/home");
+      }
+    } catch (err) {
+      setError(String(err));
+    }
   };
 
   return (
@@ -47,6 +57,7 @@ export default function LoginPage() {
               placeholder="ID"
               value={userId}
               onChange={(e) => setId(e.target.value)}
+              required
             />
             <LoginInput
               ref={passwordRef}
@@ -55,6 +66,7 @@ export default function LoginPage() {
               value={password}
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
 

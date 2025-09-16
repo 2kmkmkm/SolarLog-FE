@@ -10,7 +10,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@apis/*": ["src/apis/*"],
       "@app/*": ["src/app/*"],
-      "@features/*": ["src/features/*"]
+      "@features/*": ["src/features/*"],
+      "@routes/*": ["src/routes/*"]
     },
 
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",

@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 
 type TokenPayload = {
   userId: string;
-  location: string;
+  installLocation: string;
   exp: number;
   iat: number;
 };
