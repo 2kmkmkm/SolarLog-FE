@@ -4,7 +4,7 @@ import type { AuthState } from "../types/authType";
 const initialState: AuthState = {
   token: null,
   userId: null,
-  location: null,
+  installLocation: null,
 };
 
 const authSlice = createSlice({
@@ -14,12 +14,13 @@ const authSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload.token;
       state.userId = action.payload.userId;
-      state.location = action.payload.location;
+      state.installLocation = action.payload.installLocation;
     },
     clearToken(state) {
       state.token = null;
       state.userId = null;
-      state.location = null;
+      state.installLocation = null;
+      localStorage.removeItem("token");
     },
   },
 });

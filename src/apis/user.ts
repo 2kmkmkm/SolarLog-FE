@@ -13,4 +13,4 @@ export const postSignup = (
 ) => instance.post("/signup", { formData });
 
 export const postCheckedId = (userId: string) =>
-  instance.post("/signup/check-id");
+  instance.post(`/signup/check-id?userId=${userId}`);
