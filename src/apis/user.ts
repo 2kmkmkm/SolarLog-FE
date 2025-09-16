@@ -2,15 +2,15 @@ import { instance } from "@apis/instance";
 import type {
   accountType,
   panelInfoType,
-  installInfoType,
+  installationInfoType,
 } from "../types/userType";
 
 export const postLogin = (userId: string, password: string) =>
-  instance.post("/users/login", { userId, password });
+  instance.post("/users/login", { userId, password }).then((res)=>res.data);
 
 export const postSignup = (
-  formData: accountType & panelInfoType & installInfoType
-) => instance.post("/signup", formData);
+  formData: accountType & panelInfoType & installationInfoType
+) => instance.post("/signup", formData).then((res)=>res.data);
 
 export const getCheckedId = (userId: string) =>
-  instance.get(`/signup/check-id?userId=${userId}`);
+  instance.get(`/signup/check-id?userId=${userId}`).then((res)=>res.data);

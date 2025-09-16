@@ -3,8 +3,8 @@ import Information from "./Information";
 type RowProps = {
   label: string;
   num?: number;
-  unit: string;
-  status?: "정상" | "주의" | "교체 필요";
+  unit: string | number;
+  status?: "-" | "정상" | "주의" | "교체 필요";
   info?: string;
 };
 

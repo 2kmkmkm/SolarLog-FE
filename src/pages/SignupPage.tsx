@@ -45,12 +45,12 @@ export default function SignupPage() {
     try {
       const res = await getCheckedId(userId);
 
-      if (res.data.success) {
+      if (res.success) {
         setIsUserIdChecked(true);
         setIsUserIdCheckedAlert(false);
-        alert(res.data.message);
+        alert(res.message);
       } else {
-        alert(res.data.message);
+        alert(res.message);
         return;
       }
     } catch (err) {
@@ -92,7 +92,7 @@ export default function SignupPage() {
         initialPower: Number(form.initialPower),
       });
 
-      if (res.data.success) {
+      if (res.success) {
         alert("회원가입이 완료되었습니다.");
         nav("/login");
       } else {

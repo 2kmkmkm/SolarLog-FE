@@ -10,13 +10,13 @@ export const login = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const { data } = await postLogin(userId, password);
+      const res = await postLogin(userId, password);
 
-      if (!data.success) {
-        return rejectWithValue(data.message);
+      if (!res.success) {
+        return rejectWithValue(res.message);
       }
 
-      const token = data.data.accessToken;
+      const token = res.data.accessToken;
 
       localStorage.setItem("token", token);
       const payload = decodeToken(token);
@@ -25,8 +25,8 @@ export const login = createAsyncThunk(
         token,
         userId: payload.sub,
         installLocation: payload.installLocation,
-        success: data.success,
-        message: data.message,
+        success: res.success,
+        message: res.message,
       };
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
