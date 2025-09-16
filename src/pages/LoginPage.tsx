@@ -30,7 +30,15 @@ export default function LoginPage() {
       return;
     }
 
-    dispatch(login({ userId, password }));
+    try {
+      const res = await dispatch(login({ userId, password })).unwrap();
+
+      if (res.success) {
+        nav("/");
+      }
+    } catch (err) {
+      setError(String(err));
+    }
   };
 
   return (

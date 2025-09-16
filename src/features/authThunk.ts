@@ -11,6 +11,11 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const { data } = await postLogin(userId, password);
+
+      if (!data.success) {
+        return rejectWithValue(data.message);
+      }
+
       const token = data.accessToken;
 
       localStorage.setItem("token", token);
@@ -20,6 +25,8 @@ export const login = createAsyncThunk(
         token,
         userId: payload.userId,
         installLocation: payload.installLocation,
+        success: data.success,
+        message: data.message,
       };
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
