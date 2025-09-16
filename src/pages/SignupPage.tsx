@@ -4,38 +4,65 @@ import LabelInput from "@components/signup/LabelInput";
 import SmallButton from "@components/signup/SmallButton";
 import { AddressModal } from "@components/signup/AddressModal";
 import { useState, useRef } from "react";
+import { postCheckedId, postSignup } from "@apis/user";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
     userId: "",
     password: "",
-    confirmedPassword: "",
+
     modelName: "",
     maker: "",
     serialNum: "",
+
     installDate: "",
     installLocation: "",
     initialPower: "",
   });
+
+  const [confirmedPassword, setConfirmedPassword] = useState("");
 
   const [isUserIdChecked, setIsUserIdChecked] = useState(false);
   const [isUserIdCheckedAlert, setIsUserIdCheckedAlert] = useState(false);
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
 
   const userIdRef = useRef<HTMLInputElement>(null);
+  const nav = useNavigate();
 
   // 아이디 중복 확인
-  const handleCheckUserId = () => {
-    // Handle user ID duplication check logic here
-    setIsUserIdChecked(true);
-    setIsUserIdCheckedAlert(false);
+  const handleCheckUserId = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    userId: string
+  ) => {
+    e.preventDefault();
+
+    if (!userId) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const res = await postCheckedId(userId);
+
+      if (res.data.success) {
+        setIsUserIdChecked(true);
+        setIsUserIdCheckedAlert(false);
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+        return;
+      }
+    } catch (err) {
+      console.error("postCheckId error: ", err);
+    }
   };
 
   // 비밀번호 확인
   const isMisMatched =
     !!form.password &&
-    !!form.confirmedPassword &&
-    form.password !== form.confirmedPassword;
+    !!confirmedPassword &&
+    form.password !== confirmedPassword;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,10 +73,11 @@ export default function SignupPage() {
     }
   };
 
+  // 모든 입력 필드에 값이 입력되었는지 확인
   const allFilled = Object.values(form).every((v) => String(v).trim() !== "");
   const isFormValid = allFilled && isUserIdChecked && !isMisMatched;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isUserIdChecked) {
       setIsUserIdCheckedAlert(true);
@@ -57,9 +85,23 @@ export default function SignupPage() {
       return;
     }
     if (!isFormValid) return;
-    // confirmedPassword 제외하고 보내기
-    // POST 요청
-    // nav("/home");
+
+    try {
+      const res = await postSignup({
+        ...form,
+        initialPower: Number(form.initialPower),
+      });
+
+      if (res.data.success) {
+        alert("회원가입이 완료되었습니다.");
+        nav("/login");
+      } else {
+        alert("회원가입 중 오류가 발생했습니다.");
+        return;
+      }
+    } catch (err) {
+      console.log("postSingup error: ", err);
+    }
   };
 
   return (
@@ -81,7 +123,7 @@ export default function SignupPage() {
                 />
                 <SmallButton
                   label={"중복\n 확인"}
-                  onClick={handleCheckUserId}
+                  onClick={(e) => handleCheckUserId(e, form.userId)}
                 />
                 {/* 중복 확인 후 모달 추가 */}
               </div>
@@ -103,9 +145,9 @@ export default function SignupPage() {
               <LabelInput
                 label="비밀번호 확인"
                 type="password"
-                value={form.confirmedPassword}
+                value={confirmedPassword}
                 name="confirmedPassword"
-                onChange={handleChange}
+                onChange={(e) => setConfirmedPassword(e.target.value)}
                 required
               />
               {isMisMatched && (
@@ -144,7 +186,7 @@ export default function SignupPage() {
             <LabelInput
               label="설치일"
               type="date"
-              value={form.installDate}
+              value={form.installDate ?? ""}
               name="installDate"
               onChange={handleChange}
               required
@@ -174,7 +216,7 @@ export default function SignupPage() {
             <LabelInput
               label="최초 출력값 (kW)"
               type="number"
-              value={form.initialPower}
+              value={form.initialPower ?? ""}
               name="initialPower"
               onChange={handleChange}
               required
@@ -182,7 +224,6 @@ export default function SignupPage() {
           </div>
         </div>
         <Button label="회원가입" className="mt-10" type="submit" />
-        {/* 회원가입 완료 후 모달 */}
       </form>
     </>
   );
