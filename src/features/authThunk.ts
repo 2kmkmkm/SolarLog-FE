@@ -16,21 +16,21 @@ export const login = createAsyncThunk(
         return rejectWithValue(data.message);
       }
 
-      const token = data.accessToken;
+      const token = data.data.accessToken;
 
       localStorage.setItem("token", token);
       const payload = decodeToken(token);
 
       return {
         token,
-        userId: payload.userId,
+        userId: payload.sub,
         installLocation: payload.installLocation,
         success: data.success,
         message: data.message,
       };
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
-      return rejectWithValue(error.response?.data?.message ?? "Login failed");
+      return rejectWithValue(error.response?.data?.message ?? "로그인 실패");
     }
   }
 );

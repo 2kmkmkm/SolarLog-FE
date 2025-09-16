@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { AuthState } from "../types/authType";
+import { login } from "./authThunk";
 
 const initialState: AuthState = {
   token: null,
@@ -22,6 +23,13 @@ const authSlice = createSlice({
       state.installLocation = null;
       localStorage.removeItem("token");
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.token = action.payload.token;
+      state.userId = action.payload.userId;
+      state.installLocation = action.payload.installLocation;
+    });
   },
 });
 

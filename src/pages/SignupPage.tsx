@@ -4,7 +4,7 @@ import LabelInput from "@components/signup/LabelInput";
 import SmallButton from "@components/signup/SmallButton";
 import { AddressModal } from "@components/signup/AddressModal";
 import { useState, useRef } from "react";
-import { postCheckedId, postSignup } from "@apis/user";
+import { getCheckedId, postSignup } from "@apis/user";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
@@ -43,7 +43,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await postCheckedId(userId);
+      const res = await getCheckedId(userId);
 
       if (res.data.success) {
         setIsUserIdChecked(true);
@@ -54,7 +54,7 @@ export default function SignupPage() {
         return;
       }
     } catch (err) {
-      console.error("postCheckId error: ", err);
+      console.error("getCheckId error: ", err);
     }
   };
 
