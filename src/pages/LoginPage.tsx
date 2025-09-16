@@ -34,7 +34,7 @@ export default function LoginPage() {
       const res = await dispatch(login({ userId, password })).unwrap();
 
       if (res.success) {
-        nav("/");
+        nav("/home");
       }
     } catch (err) {
       setError(String(err));
