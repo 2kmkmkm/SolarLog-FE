@@ -1,30 +1,35 @@
 import NotificationItem from "@components/notification/NotificationItem";
 import type { notificationType } from "../types/notificationType";
-
-const list: notificationType[] = [];
-
-const groupByMonth = (list: notificationType[]) => {
-  return list.reduce((acc, item) => {
-    const monthKey = `${new Date(item.alarmDate).getFullYear()}년 ${
-      new Date(item.alarmDate).getMonth() + 1
-    }월`;
-    if (!acc[monthKey]) acc[monthKey] = [];
-    acc[monthKey].push(item);
-    return acc;
-  }, {} as Record<string, notificationType[]>);
-};
-
-const grouped = groupByMonth(list);
-
-const sortedMonths = Object.keys(grouped).sort((a, b) => {
-  const [yearA, monthA] = a.match(/\d+/g)!.map(Number);
-  const [yearB, monthB] = b.match(/\d+/g)!.map(Number);
-
-  if (yearA !== yearB) return yearB - yearA;
-  return monthB - monthA;
-});
+import { useQuery } from "@tanstack/react-query";
+import { getHistoryList } from "@apis/detection";
 
 export default function NotificationPage() {
+  const { data } = useQuery({
+    queryKey: ["history"],
+    queryFn: getHistoryList,
+  });
+
+  const groupByMonth = (list: notificationType[]) => {
+    return list.reduce((acc, item) => {
+      const monthKey = `${new Date(item.alarmDate).getFullYear()}년 ${
+        new Date(item.alarmDate).getMonth() + 1
+      }월`;
+      if (!acc[monthKey]) acc[monthKey] = [];
+      acc[monthKey].push(item);
+      return acc;
+    }, {} as Record<string, notificationType[]>);
+  };
+
+  const grouped = groupByMonth(data?.data ?? []);
+
+  const sortedMonths = Object.keys(grouped).sort((a, b) => {
+    const [yearA, monthA] = a.match(/\d+/g)!.map(Number);
+    const [yearB, monthB] = b.match(/\d+/g)!.map(Number);
+
+    if (yearA !== yearB) return yearB - yearA;
+    return monthB - monthA;
+  });
+
   return (
     <div className="p-4 flex flex-col gap-4">
       {sortedMonths.length > 0 ? (

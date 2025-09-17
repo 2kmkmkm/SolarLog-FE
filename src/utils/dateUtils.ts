@@ -24,7 +24,7 @@ export function formatIsoToDotDate(iso: string): string {
   return `${year}.${month}.${day}`;
 }
 
-export function formatIsoToDotDay(iso: string): string {
+export function formatIsoToDotDay(iso: Date): string {
   const date = new Date(iso);
 
   const year = date.getFullYear();
