@@ -10,6 +10,6 @@ export type notificationType = {
 export type notificationDetailType = {
   eventType: string;
   eventDetail: string;
-  alarmDate: string;
+  alarmDate: Date;
   image: string;
 };
