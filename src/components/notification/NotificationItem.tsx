@@ -2,6 +2,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import type { notificationType } from "../../types/notificationType";
 import { useNavigate } from "react-router-dom";
 import { formatIsoToDayOfWeekTime } from "@utils/dateUtils";
+import { postAlarmRead } from "@apis/detection";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function NotificationItem({
   alarmId,
@@ -14,9 +16,23 @@ export default function NotificationItem({
   const nav = useNavigate();
   const date = formatIsoToDayOfWeekTime(alarmDate);
 
+  const queryClient = useQueryClient();
+
+  const { mutate: readAlarm } = useMutation({
+    mutationFn: postAlarmRead,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["history"] });
+    },
+  });
+
+  const handleItemClick = async () => {
+    readAlarm(alarmId);
+    nav(`/detection/${alarmId}`);
+  };
+
   return (
     <button
-      onClick={() => nav(`/detection/${alarmId}`)}
+      onClick={handleItemClick}
       className={`${
         isRead && "opacity-70 hover:opacity-30"
       } bg-white p-3 flex flex-col gap-2 rounded-[10px]`}
