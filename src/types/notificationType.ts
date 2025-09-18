@@ -4,7 +4,7 @@ export type notificationType = {
   eventDetail: "전기적" | "물리적" | "조류 배설물" | "먼지" | "눈";
   modelName: string;
   alarmDate: string;
-  isRead: boolean;
+  read: boolean;
 };
 
 export type notificationDetailType = {
