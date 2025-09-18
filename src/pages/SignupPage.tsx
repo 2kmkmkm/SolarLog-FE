@@ -6,6 +6,8 @@ import { AddressModal } from "@components/signup/AddressModal";
 import { useState, useRef } from "react";
 import { getCheckedId, postSignup } from "@apis/user";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -30,6 +32,39 @@ export default function SignupPage() {
   const userIdRef = useRef<HTMLInputElement>(null);
   const nav = useNavigate();
 
+  const signupMutation = useMutation({
+    mutationFn: postSignup,
+    onSuccess: (res) => {
+      if (res.success) {
+        alert(res.message);
+        nav("/login");
+      } else {
+        alert(res.message);
+      }
+    },
+    onError: () => {
+      alert("서버 오류가 발생했습니다.");
+    },
+  });
+
+  const checkedIdMutation = useMutation({
+    mutationFn: getCheckedId,
+    onSuccess: (res) => {
+      if (res.success) {
+        setIsUserIdChecked(true);
+        setIsUserIdCheckedAlert(false);
+        alert(res.message);
+      } else {
+        setIsUserIdChecked(false);
+        alert(res.message);
+      }
+    },
+    onError: () => {
+      setIsUserIdChecked(false);
+      alert("아이디 확인 중 오류가 발생했습니다.");
+    },
+  });
+
   // 아이디 중복 확인
   const handleCheckUserId = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -42,20 +77,7 @@ export default function SignupPage() {
       return;
     }
 
-    try {
-      const res = await getCheckedId(userId);
-
-      if (res.success) {
-        setIsUserIdChecked(true);
-        setIsUserIdCheckedAlert(false);
-        alert(res.message);
-      } else {
-        alert(res.message);
-        return;
-      }
-    } catch (err) {
-      console.error("getCheckId error: ", err);
-    }
+    checkedIdMutation.mutate(userId);
   };
 
   // 비밀번호 확인
@@ -79,6 +101,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!isUserIdChecked) {
       setIsUserIdCheckedAlert(true);
       userIdRef.current?.focus();
@@ -86,22 +109,10 @@ export default function SignupPage() {
     }
     if (!isFormValid) return;
 
-    try {
-      const res = await postSignup({
-        ...form,
-        initialPower: Number(form.initialPower),
-      });
-
-      if (res.success) {
-        alert("회원가입이 완료되었습니다.");
-        nav("/login");
-      } else {
-        alert("회원가입 중 오류가 발생했습니다.");
-        return;
-      }
-    } catch (err) {
-      console.log("postSingup error: ", err);
-    }
+    signupMutation.mutate({
+      ...form,
+      initialPower: Number(form.initialPower),
+    });
   };
 
   return (
@@ -122,10 +133,19 @@ export default function SignupPage() {
                   required
                 />
                 <SmallButton
-                  label={"중복\n 확인"}
+                  label={
+                    checkedIdMutation.isPending ? (
+                      <ClipLoader color="#ffffff" size={20} />
+                    ) : (
+                      <>
+                        중복
+                        <br />
+                        확인
+                      </>
+                    )
+                  }
                   onClick={(e) => handleCheckUserId(e, form.userId)}
                 />
-                {/* 중복 확인 후 모달 추가 */}
               </div>
               {isUserIdCheckedAlert && (
                 <span className="body2 text-red ml-1">
@@ -223,7 +243,19 @@ export default function SignupPage() {
             />
           </div>
         </div>
-        <Button label="회원가입" className="mt-10" type="submit" />
+        <Button
+          label={
+            signupMutation.isPending ? (
+              <ClipLoader color="#ffffff" size={20} />
+            ) : (
+              "회원가입"
+            )
+          }
+          className="mt-10"
+          type="submit"
+        >
+          안녕
+        </Button>
       </form>
     </>
   );

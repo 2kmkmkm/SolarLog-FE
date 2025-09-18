@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 
 type SmallButtonProps = {
-  label?: string;
+  label?: string | React.ReactNode;
   icon?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
