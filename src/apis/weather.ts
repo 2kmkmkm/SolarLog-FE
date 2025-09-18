@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { kakaoGecodeType, openWeatherType } from "../types/weatherType"
+import type { kakaoGecodeType, openWeatherType } from "../types/weatherType";
 
 export const kakaoAxios = axios.create({
   baseURL: "https://dapi.kakao.com/v2/local",
@@ -27,7 +27,14 @@ export async function getCoordsFromAddress(address: string) {
 
 export async function getWeather(lat: number, lon: number) {
   const res = await openWeatherAxios.get<openWeatherType>(
-    `/weather?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_WEATHER_API_KEY}&units=metric&lang=kr`
+    `/weather?lat=${lat}&lon=${lon}&appid=${
+      import.meta.env.VITE_WEATHER_API_KEY
+    }&units=metric&lang=kr`
   );
   return res.data;
+}
+
+export async function fetchWeather(location: string) {
+  const { lat, lon } = await getCoordsFromAddress(location);
+  return getWeather(lat, lon);
 }

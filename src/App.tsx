@@ -9,7 +9,6 @@ import MyPage from "@pages/MyPage";
 import Layout from "@components/common/Layout";
 import DetectionPage from "@pages/DetectionPage";
 import NotFoundPage from "@pages/NotFoundPage";
-import LoadingScreen from "@components/common/LoadingScreen";
 import { useAppDispatch } from "@hooks/useRedux";
 import { useEffect } from "react";
 import { decodeToken } from "@utils/decodeToken";
@@ -53,7 +52,6 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-      <LoadingScreen />
     </>
   );
 }

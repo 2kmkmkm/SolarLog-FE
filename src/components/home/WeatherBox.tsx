@@ -1,24 +1,15 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useState, useEffect } from "react";
-import { getCoordsFromAddress, getWeather } from "@apis/weather";
-import type { openWeatherType } from "../../types/weatherType";
+import { fetchWeather } from "@apis/weather";
+import { useAppSelector } from "@hooks/useRedux";
+import { useQuery } from "@tanstack/react-query";
 
-export default function WeatherBox({ location }: { location: string }) {
-  const [weather, setWeather] = useState<openWeatherType | null>(null);
+export default function WeatherBox() {
+  const location = useAppSelector((state) => state.auth.installLocation);
 
-  useEffect(() => {
-    const handleWeatherSearch = async () => {
-      try {
-        const { lat, lon } = await getCoordsFromAddress(location);
-        const weatherData = await getWeather(lat, lon);
-        setWeather(weatherData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    handleWeatherSearch();
-  }, []);
+  const { data: weather } = useQuery({
+    queryKey: ["weather"],
+    queryFn: () => fetchWeather(location ?? ""),
+  });
 
   return (
     <div className="flex px-4 py-3 bg-white rounded-2xl shadow-box justify-between items-center">

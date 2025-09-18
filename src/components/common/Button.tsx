@@ -1,6 +1,6 @@
 type ButtonProps = {
   modal?: boolean;
-  label: string;
+  label: string | React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({

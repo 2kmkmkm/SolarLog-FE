@@ -11,7 +11,7 @@ export default function NotificationItem({
   eventDetail,
   modelName,
   alarmDate,
-  isRead = false,
+  read,
 }: notificationType) {
   const nav = useNavigate();
   const date = formatIsoToDayOfWeekTime(alarmDate);
@@ -39,7 +39,7 @@ export default function NotificationItem({
     <button
       onClick={handleItemClick}
       className={`${
-        isRead && "opacity-70 hover:opacity-30"
+        read && "opacity-70 hover:opacity-30"
       } bg-white p-3 flex flex-col gap-2 rounded-[10px]`}
     >
       <div className="flex justify-between">
