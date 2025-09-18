@@ -6,21 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import { formatIsoToDotDay } from "@utils/dateUtils";
 import { getHistoryDetail } from "@apis/detection";
 import { useGlobalLoading } from "@hooks/useGlobalLoading";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import LoadingScreen from "@components/common/LoadingScreen";
 
 export default function DetectionPage() {
   const { isLoading, delay } = useGlobalLoading();
   const nav = useNavigate();
+  const { alarmId } = useParams();
 
   useEffect(() => {
     if (delay) nav("/*");
   }, [delay, nav]);
 
   const { data } = useQuery({
-    queryKey: ["detection"],
-    queryFn: getHistoryDetail,
+    queryKey: ["detection", alarmId],
+    queryFn: () => getHistoryDetail(alarmId ?? ""),
   });
 
   const detection = data?.data;

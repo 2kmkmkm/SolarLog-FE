@@ -13,9 +13,9 @@ export const getHistoryList = () =>
     .get<APIResponseType<notificationType[]>>("/history")
     .then((res) => res.data);
 
-export const getHistoryDetail = () =>
+export const getHistoryDetail = (alarmId: string) =>
   instance
-    .get<APIResponseType<notificationDetailType>>("/history/details")
+    .get<APIResponseType<notificationDetailType>>(`/history/details/${alarmId}`)
     .then((res) => res.data);
 
 export const postAlarmRead = (alarmId: number) =>
