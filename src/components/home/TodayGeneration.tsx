@@ -3,30 +3,45 @@ import GreenBox from "@components/common/GreenBox";
 import Row from "@components/common/Row";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { formatIsoToMonthDayTime } from "@utils/dateUtils";
-import { useState } from "react";
-
-type TodayGenerationProps = {
-  power: number;
-  totalDailyPower: number;
-  cumulativePower: number;
-};
-
-export default function TodayGeneration({
-  power,
-  totalDailyPower,
-  cumulativePower,
-}: TodayGenerationProps) {
+import { useEffect, useState } from "react";
+import { getTodayGeneration } from "@apis/generation";
+export default function TodayGeneration() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [rotating, setRotating] = useState(false);
 
+  const [cumulativePower, setCumulativePower] = useState(0);
+  const [power, setPower] = useState(0);
+  const [totalDailyPower, setTotalDailyPower] = useState(0);
+
   const dateTime = formatIsoToMonthDayTime(currentTime);
+
+  const fetchTodayGeneration = async () => {
+    try {
+      const res = await getTodayGeneration();
+
+      if (res.success) {
+        setCumulativePower(res.data.cumulativePower);
+        setPower(res.data.power);
+        setTotalDailyPower(res.data.totalDailyPower);
+      } else alert(res.message);
+    } catch (err) {
+      console.log("fetchTodayGeneration Error: ", err);
+    }
+  };
 
   const handleTimeClick = () => {
     const time = new Date();
+
+    fetchTodayGeneration();
+
     setRotating(true);
     setTimeout(() => setRotating(false), 1000);
     setCurrentTime(time);
   };
+
+  useEffect(() => {
+    fetchTodayGeneration();
+  }, []);
 
   return (
     <Box>
