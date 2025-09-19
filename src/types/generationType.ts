@@ -5,7 +5,7 @@ export type todayGenerationType = {
 };
 
 export type graphType = {
-  measureDate?: Date;
+  measuredDate?: string;
   period?: string;
   power: number;
 };
