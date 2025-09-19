@@ -4,9 +4,24 @@ import Row from "@components/common/Row";
 import DailyCalendar from "./DailyCalendar";
 import { useState } from "react";
 import { subDays } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import { getDailyGeneration } from "@apis/generation";
 
 export default function Daily() {
   const [selectedDate, setSelectedDate] = useState(subDays(new Date(), 1));
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth() + 1;
+  const day = selectedDate.getDate();
+
+  const { data } = useQuery({
+    queryKey: ["daily", year, month, day],
+    queryFn: () => getDailyGeneration(year, month, day),
+  });
+
+  const daily = data?.data;
+
+  if (!daily) return null;
 
   return (
     <div className="flex flex-col gap-3">
@@ -22,16 +37,24 @@ export default function Daily() {
       <div className="w-full flex flex-col items-end">
         <Badge>
           <span className="body3_bold text-gray">전일 대비</span>
-          <span className="body3 text-pink">▲ +12%</span>
+          {daily.dayCompared > 0 ? (
+            <span className="body3 text-pink">▲ +{daily.dayCompared}%</span>
+          ) : daily.dayCompared < 0 ? (
+            <span className="body3 text-blue">
+              ▼ {Math.abs(daily.dayCompared)}%
+            </span>
+          ) : (
+            <span className="body3 text-gray">- 0%</span>
+          )}
         </Badge>
       </div>
       <GreenBox>
-        <Row label="최고 출력 시간대" num={13} unit="시" />
-        <Row label="최고 출력량" num={11.4} unit="kW" />
-        <Row label="총 발전량" num={43.1} unit="kW" />
+        <Row label="최고 출력 시간대" num={daily.peakPowerTime} unit="시" />
+        <Row label="최고 출력량" num={daily.peakPower} unit="kW" />
+        <Row label="총 발전량" num={daily.totalDailyPower} unit="kW" />
         <Row
           label="CO₂ 절감량"
-          num={0.01}
+          num={daily.co2Reduction}
           unit="kg"
           info="발전량(kWh) × 배출계수(kgCO₂/kWh)"
         />

@@ -11,7 +11,7 @@ export type graphType = {
 };
 
 export type analysisType = {
-  peakPowerTime: string;
+  peakPowerTime: number;
   peakPower: number;
   totalDailyPower?: number;
   totalMonthlyPower?: number;
