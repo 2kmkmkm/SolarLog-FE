@@ -30,14 +30,16 @@ export const getDailyGraph = (year: number, month: number, day: number) =>
     })
     .then((res) => res.data);
 
-export const getMonthlyGeneration = (year: number, month: number) => {
-  instance.get<APIResponseType<analysisType>>("/dashboard/monthly", {
-    params: { year, month },
-  });
-};
+export const getMonthlyGeneration = (year: number, month: number) =>
+  instance
+    .get<APIResponseType<analysisType>>("/dashboard/monthly", {
+      params: { year, month },
+    })
+    .then((res) => res.data);
 
-export const getMontlyGraph = (year: number, month: number) => {
-  instance.get<APIResponseType<graphType[]>>("/dashboard/monthly-inquiry", {
-    params: { year, month },
-  });
-};
+export const getMontlyGraph = (year: number, month: number) =>
+  instance
+    .get<APIResponseType<graphType[]>>("/dashboard/monthly-inquiry", {
+      params: { year, month },
+    })
+    .then((res) => res.data);
