@@ -1,4 +1,3 @@
-import { useOutsideClick } from "@hooks/useOutsideclick";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   format,
@@ -18,7 +17,6 @@ import {
   useCallback,
   useMemo,
   useState,
-  useRef,
   type Dispatch,
   type SetStateAction,
 } from "react";
@@ -31,10 +29,6 @@ export default function DailyCalendar({
   setCurrentDate: Dispatch<SetStateAction<Date>>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useOutsideClick([modalRef], () => setIsOpen(false));
 
   const today = new Date();
   const yesterday = subDays(today, 1);
@@ -143,6 +137,7 @@ export default function DailyCalendar({
               return (
                 <button
                   key={index}
+                  type="button"
                   onClick={() => {
                     if (!isFuture) {
                       setCurrentDate(day);

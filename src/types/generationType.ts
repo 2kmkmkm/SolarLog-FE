@@ -12,9 +12,10 @@ export type graphType = {
 
 export type analysisType = {
   peakPowerTime: number;
+  peakPowerDay: number;
   peakPower: number;
-  totalDailyPower?: number;
-  totalMonthlyPower?: number;
+  totalDailyPower: number;
+  totalMonthlyPower: number;
   co2Reduction: number;
   dayCompared: number;
 };

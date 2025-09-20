@@ -23,7 +23,7 @@ export default function Monthly() {
   if (!monthly) return null;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 p-4">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full justify-center">
           <MonthlyCalendar
@@ -48,7 +48,7 @@ export default function Monthly() {
         </Badge>
       </div>
       <GreenBox>
-        <Row label="최고 출력 일자" num={monthly.peakPowerTime} unit="시" />
+        <Row label="최고 출력 일자" num={monthly.peakPowerDay} unit="일" />
         <Row label="최고 출력량" num={monthly.peakPower} unit="kW" />
         <Row label="총 발전량" num={monthly.totalMonthlyPower} unit="kW" />
         <Row

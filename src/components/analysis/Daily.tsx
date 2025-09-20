@@ -11,12 +11,14 @@ export default function Daily() {
   const [selectedDate, setSelectedDate] = useState(subDays(new Date(), 1));
 
   const year = selectedDate.getFullYear();
-  const month = selectedDate.getMonth() + 1;
-  const day = selectedDate.getDate();
+  const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+  const day = String(selectedDate.getDate()).padStart(2, "0");
+
+  const date = `${year}-${month}-${day}`;
 
   const { data } = useQuery({
-    queryKey: ["daily", year, month, day],
-    queryFn: () => getDailyGeneration(year, month, day),
+    queryKey: ["daily", date],
+    queryFn: () => getDailyGeneration(date),
   });
 
   const daily = data?.data;
@@ -24,7 +26,7 @@ export default function Daily() {
   if (!daily) return null;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 p-4">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full justify-center">
           <DailyCalendar

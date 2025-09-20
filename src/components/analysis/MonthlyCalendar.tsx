@@ -1,9 +1,7 @@
-import { useOutsideClick } from "@hooks/useOutsideclick";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { format, isSameDay, subYears, addYears } from "date-fns";
 import {
   useCallback,
-  useRef,
   useState,
   type Dispatch,
   type SetStateAction,
@@ -17,10 +15,6 @@ export default function MonthlyCalendar({
   setCurrentMonth: Dispatch<SetStateAction<Date>>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useOutsideClick([modalRef], () => setIsOpen(false));
 
   const today = new Date();
   const currentYear = today.getFullYear();

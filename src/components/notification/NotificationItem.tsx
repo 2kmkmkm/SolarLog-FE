@@ -55,7 +55,7 @@ export default function NotificationItem({
       <div className="flex whitespace-nowrap  w-full">
         <span className="body2_bold text-green">{modelName}</span>
         <span className="body2 text-darkgray truncate">
-          에 {eventDetail} {eventType}이 감지되었습니다
+          에 {eventDetail}이 감지되었습니다
         </span>
       </div>
     </button>

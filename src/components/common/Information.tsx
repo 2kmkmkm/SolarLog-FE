@@ -17,7 +17,7 @@ export default function Information({ contents }: { contents: string }) {
       {isOpen && (
         <div
           ref={boxRef}
-          className="absolute border border-gray/10 shadow-box max-w-[210px] min-w-fit left-full ml-1 z-50 bg-lightlightgray px-2 py-1 rounded-lg"
+          className="absolute border border-gray/10 -translate-x-1/4 left-1/2 shadow-box max-w-[210px] min-w-fit bottom-full mb-1 z-50 bg-lightlightgray px-2 py-1 rounded-lg"
         >
           <span className="body3 text-darkgray whitespace-nowrap">
             {contents}

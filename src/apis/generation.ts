@@ -16,10 +16,10 @@ export const getTodayGraph = () =>
     .get<APIResponseType<graphType[]>>("/dashboard/today-inquiry")
     .then((res) => res.data);
 
-export const getDailyGeneration = (year: number, month: number, day: number) =>
+export const getDailyGeneration = (date: string) =>
   instance
     .get<APIResponseType<analysisType>>("/dashboard/daily", {
-      params: { year, month, day },
+      params: { date },
     })
     .then((res) => res.data);
 

@@ -11,7 +11,7 @@ export function formatIsoToDayOfWeekTime(iso: string): string {
     hour12: false,
   });
 
-  return `${day}일(${weekday}) ${time}`;
+  return `${day}(${weekday}) ${time}`;
 }
 
 export function formatIsoToDotDate(iso: string): string {
