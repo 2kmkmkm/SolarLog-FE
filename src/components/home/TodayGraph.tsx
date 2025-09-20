@@ -5,7 +5,7 @@ import { getTodayGraph } from "@apis/generation";
 import Graph from "@components/common/Graph";
 
 export default function TodayGraph() {
-  const [list, setList] = useState<graphType[] | null>(null);
+  const [list, setList] = useState<graphType[]>([]);
 
   useEffect(() => {
     const fetchTodayGraph = async () => {
@@ -21,5 +21,5 @@ export default function TodayGraph() {
     fetchTodayGraph();
   }, []);
 
-  return <Graph list={list ?? []} />;
+  return <Graph list={list ?? []} dataKey="hour" label="시" />;
 }

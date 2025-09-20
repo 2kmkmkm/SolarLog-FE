@@ -23,10 +23,10 @@ export const getDailyGeneration = (date: string) =>
     })
     .then((res) => res.data);
 
-export const getDailyGraph = (year: number, month: number, day: number) =>
+export const getDailyGraph = (date: string) =>
   instance
     .get<APIResponseType<graphType[]>>("/dashboard/daily-inquiry", {
-      params: { year, month, day },
+      params: { date },
     })
     .then((res) => res.data);
 
@@ -37,7 +37,7 @@ export const getMonthlyGeneration = (year: number, month: number) =>
     })
     .then((res) => res.data);
 
-export const getMontlyGraph = (year: number, month: number) =>
+export const getMonthlyGraph = (year: number, month: number) =>
   instance
     .get<APIResponseType<graphType[]>>("/dashboard/monthly-inquiry", {
       params: { year, month },

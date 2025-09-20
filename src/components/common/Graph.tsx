@@ -1,4 +1,4 @@
-import type { graphType } from "../../types/generationType";
+import type { graphDataType } from "../../types/generationType";
 import {
   LineChart,
   Line,
@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function Graph({ list }: { list: graphType[] }) {
+export default function Graph({ list, label, dataKey }: graphDataType) {
   return (
     <ResponsiveContainer width="100%" height={250}>
       <LineChart
@@ -16,12 +16,12 @@ export default function Graph({ list }: { list: graphType[] }) {
         margin={{ top: 30, right: 35, left: 0, bottom: 10 }}
       >
         <XAxis
-          dataKey="hour"
+          dataKey={dataKey}
           tick={{ fontSize: 10, fill: "#989898" }}
           axisLine={{ stroke: "#C5C5C5" }}
           tickLine={false}
           label={{
-            value: "(시)",
+            value: `(${label})`,
             position: "insideBottomRight", // or "insideBottom"
             offset: -2, // 위치 조정
             fill: "#C5C5C5",

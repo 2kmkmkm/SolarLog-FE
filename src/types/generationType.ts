@@ -19,3 +19,9 @@ export type analysisType = {
   co2Reduction: number;
   dayCompared: number;
 };
+
+export type graphDataType = {
+  list: graphType[];
+  dataKey: string;
+  label: string;
+};

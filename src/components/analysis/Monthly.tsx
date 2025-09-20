@@ -5,7 +5,8 @@ import MonthlyCalendar from "./MonthlyCalendar";
 import { useState } from "react";
 import { subMonths } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
-import { getMonthlyGeneration } from "@apis/generation";
+import { getMonthlyGeneration, getMonthlyGraph } from "@apis/generation";
+import Graph from "@components/common/Graph";
 
 export default function Monthly() {
   const [selectedMonth, setSelectedMonth] = useState(subMonths(new Date(), 1));
@@ -13,14 +14,20 @@ export default function Monthly() {
   const year = selectedMonth.getFullYear();
   const month = selectedMonth.getMonth() + 1;
 
-  const { data } = useQuery({
-    queryKey: ["monthly", year, month],
+  const { data: generation } = useQuery({
+    queryKey: ["monthlyGeneration", year, month],
     queryFn: () => getMonthlyGeneration(year, month),
+    select: (res) => res.data,
   });
 
-  const monthly = data?.data;
+  const { data: graphList } = useQuery({
+    queryKey: ["dailyGraph", year, month],
+    queryFn: () => getMonthlyGraph(year, month),
+    select: (res) => res.data,
+  });
 
-  if (!monthly) return null;
+  console.log("graphList: ", graphList);
+  if (!generation || !graphList) return null;
 
   return (
     <div className="flex flex-col gap-3 p-4">
@@ -31,16 +38,18 @@ export default function Monthly() {
             setCurrentMonth={setSelectedMonth}
           />
         </div>
-        <div className="w-full h-44 border"></div>
+        <Graph list={graphList} label="일" dataKey="period" />
       </div>
       <div className="w-full flex flex-col items-end">
         <Badge>
           <span className="body3_bold text-gray">전일 대비</span>
-          {monthly.dayCompared > 0 ? (
-            <span className="body3 text-pink">▲ +{monthly.dayCompared}%</span>
-          ) : monthly.dayCompared < 0 ? (
+          {generation.dayCompared > 0 ? (
+            <span className="body3 text-pink">
+              ▲ +{generation.dayCompared}%
+            </span>
+          ) : generation.dayCompared < 0 ? (
             <span className="body3 text-blue">
-              ▼ {Math.abs(monthly.dayCompared)}%
+              ▼ {Math.abs(generation.dayCompared)}%
             </span>
           ) : (
             <span className="body3 text-gray">- 0%</span>
@@ -48,12 +57,12 @@ export default function Monthly() {
         </Badge>
       </div>
       <GreenBox>
-        <Row label="최고 출력 일자" num={monthly.peakPowerDay} unit="일" />
-        <Row label="최고 출력량" num={monthly.peakPower} unit="kW" />
-        <Row label="총 발전량" num={monthly.totalMonthlyPower} unit="kW" />
+        <Row label="최고 출력 일자" num={generation.peakPowerDay} unit="일" />
+        <Row label="최고 출력량" num={generation.peakPower} unit="kW" />
+        <Row label="총 발전량" num={generation.totalMonthlyPower} unit="kW" />
         <Row
           label="CO₂ 절감량"
-          num={monthly.co2Reduction}
+          num={generation.co2Reduction}
           unit="kg"
           info="발전량(kWh) × 배출계수(kgCO₂/kWh)"
         />
