@@ -14,12 +14,12 @@ export default function TodayGraph() {
 
         if (res.success) {
           setList(parseHours(res.data));
-          console.log(list);
         }
       } catch (err) {
         console.log("getTodayGraph Error: ", err);
       }
     };
+
     fetchTodayGraph();
   }, []);
 
