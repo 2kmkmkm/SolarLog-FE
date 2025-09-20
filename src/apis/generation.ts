@@ -3,7 +3,7 @@ import type {
   todayGenerationType,
   graphType,
   analysisType,
-} from "../types/generation";
+} from "../types/generationType";
 import { instance } from "./instance";
 
 export const getTodayGeneration = () =>
