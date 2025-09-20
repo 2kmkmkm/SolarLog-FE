@@ -11,7 +11,6 @@ export default function TodayGraph() {
     const fetchTodayGraph = async () => {
       try {
         const res = await getTodayGraph();
-
         if (res.success) {
           setList(parseHours(res.data));
         }
@@ -19,7 +18,6 @@ export default function TodayGraph() {
         console.log("getTodayGraph Error: ", err);
       }
     };
-
     fetchTodayGraph();
   }, []);
 
