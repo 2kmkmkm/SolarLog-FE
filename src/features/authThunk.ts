@@ -30,7 +30,7 @@ export const login = createAsyncThunk(
       };
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
-      return rejectWithValue(error.response?.data?.message ?? "로그인 실패");
+      return rejectWithValue(error.response?.data?.message ?? "로그인 실패. 다시 시도해주세요.");
     }
   }
 );

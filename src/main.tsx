@@ -15,3 +15,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </BrowserRouter>
   </Provider>
 );
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/firebase-messaging-sw.js")
+    .then((registeration) => {
+      console.log("ServiceWorker 등록 성공: ", registeration);
+    })
+    .catch((err) => {
+      console.log("ServiceWorker 등록 실패: ", err);
+    });
+}

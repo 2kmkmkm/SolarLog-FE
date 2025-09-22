@@ -25,6 +25,8 @@ instance.interceptors.response.use(
       const { store } = await import("../app/store");
       const { clearToken } = await import("@features/authSlice");
 
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+
       store.dispatch(clearToken());
       localStorage.removeItem("token");
       window.location.href = "/login";

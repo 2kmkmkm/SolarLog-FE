@@ -6,6 +6,7 @@ const initialState: AuthState = {
   token: null,
   userId: null,
   installLocation: null,
+  isLoading: false
 };
 
 const authSlice = createSlice({
@@ -25,11 +26,19 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.token = action.payload.token;
-      state.userId = action.payload.userId;
-      state.installLocation = action.payload.installLocation;
-    });
+    builder.
+      addCase(login.pending, (state)=>{
+        state.isLoading = true; // 로그인 시작
+      }).
+      addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false; // 로그인 성공
+        state.token = action.payload.token;
+        state.userId = action.payload.userId;
+        state.installLocation = action.payload.installLocation;
+      })
+      .addCase(login.rejected, (state) => {
+        state.isLoading = false // 로그인 실패
+      })
   },
 });
 
