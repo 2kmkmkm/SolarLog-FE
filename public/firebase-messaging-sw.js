@@ -19,15 +19,18 @@ const messaging = firebase.messaging();
 // 백그라운드 푸시 알림 처리
 messaging.onBackgroundMessage((payload) => {
   console.log("백그라운드 메시지 수신: ", payload);
+  console.log("FCM payload: ", payload.notification);
 
-  const notificationTitle = `${payload.data?.eventType} 감지`;
-  const notificationOptions = {
-    body: `${payload.data?.eventDetail}이 감지되었습니다`,
+  const { notification, data } = payload;
+
+  const title = `${notification.title} 감지`;
+  const body = `${notification.body}이 감지되었습니다`;
+
+  self.registration.showNotification(title, {
+    body,
     icon: "/maskable_icon_x192.png",
-    data: payload?.data.alarmId,
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
+    data,
+  });
 });
 
 self.addEventListener("notificationclick", (event) => {
