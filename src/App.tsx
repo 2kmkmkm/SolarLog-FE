@@ -48,7 +48,7 @@ function App() {
 
       if (payload.data?.alarmId) {
         setAlarmId(payload.data.alarmId);
-        setContents(payload.data.eventDetail);
+        setContents(`${payload.data.eventDetail}이 감지되었습니다`);
         setIsOpen(true);
       }
     });
