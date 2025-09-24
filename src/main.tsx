@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/firebase-messaging-sw.js")
+    .register("/service-worker.js")
     .then((registeration) => {
       console.log("ServiceWorker 등록 성공: ", registeration);
     })
