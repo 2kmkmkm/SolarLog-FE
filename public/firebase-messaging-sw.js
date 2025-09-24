@@ -1,3 +1,11 @@
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
+});
+
 importScripts(
   "https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"
 );
@@ -19,24 +27,24 @@ const messaging = firebase.messaging();
 // 백그라운드 푸시 알림 처리
 messaging.onBackgroundMessage((payload) => {
   console.log("백그라운드 메시지 수신: ", payload);
-  console.log("FCM payload: ", payload.notification);
+  console.log("FCM payload: ", payload.data);
 
-  const { notification, data } = payload;
+  const { data } = payload;
 
-  const title = `${notification.title} 감지`;
-  const body = `${notification.body}이 감지되었습니다`;
+  const title = `${data.eventType} 감지`;
+  const body = `${data.eventDetail}이 감지되었습니다`;
 
   self.registration.showNotification(title, {
     body,
     icon: "/maskable_icon_x192.png",
-    data,
+    data: { alarmId: data.alarmId },
   });
 });
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close(); // 알람 닫기
 
-  const alarmId = event.notification.data?.alarmId;
+  const alarmId = Number(event.notification.data?.alarmId);
 
   event.waitUntil(
     (async () => {
