@@ -1,6 +1,11 @@
 import type { Unsubscribe } from "@reduxjs/toolkit";
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage, type MessagePayload } from "firebase/messaging";
+import {
+  getMessaging,
+  getToken,
+  onMessage,
+  type MessagePayload,
+} from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -11,8 +16,8 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig)
-export const messaging= getMessaging(app);
+const app = initializeApp(firebaseConfig);
+export const messaging = getMessaging(app);
 
 export const requestFcmToken = async () => {
   try {
@@ -24,17 +29,20 @@ export const requestFcmToken = async () => {
       return null;
     }
 
+    const registration = await navigator.serviceWorker.ready;
+
     // 2. 권한이 허용된 후에만 토큰 요청
     const token = await getToken(messaging, {
-      vapidKey: import.meta.env.VITE_VAPID_KEY
-    })
+      vapidKey: import.meta.env.VITE_VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    });
 
     console.log("FCM Token: ", token);
     return token;
   } catch (err) {
     console.error("FCM token register Error: ", err);
   }
-}
+};
 
 export const onForegroundMessage = (
   cb: (payload: MessagePayload) => void

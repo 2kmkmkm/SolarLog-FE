@@ -39,7 +39,11 @@ export default function NotificationPage() {
             <div className="flex flex-col gap-px">
               {grouped[month]
                 .slice()
-                .reverse()
+                .sort(
+                  (a, b) =>
+                    new Date(b.alarmDate).getTime() -
+                    new Date(a.alarmDate).getTime()
+                )
                 .map((item) => (
                   <NotificationItem key={item.alarmId} {...item} />
                 ))}

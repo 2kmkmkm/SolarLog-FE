@@ -55,9 +55,13 @@ self.addEventListener("notificationclick", (event) => {
         const client = allClients[0];
         await client.focus();
         if (alarmId) {
-          client.postMessage({ type: "OPEN_DETECTION", alarmId });
+          console.log("알람 ID:", alarmId);
+          client.navigate(`/detection/${alarmId}`);
+        } else {
+          client.navigate(`/`);
         }
       } else {
+        // 열린 탭이 없으면 새 창 열기
         clients.openWindow(alarmId ? `/detection/${alarmId}` : "/");
       }
     })()
