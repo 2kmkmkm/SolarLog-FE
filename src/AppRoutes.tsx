@@ -20,7 +20,7 @@ export default function AppRoutes() {
       </Route>
       <Route element={<PrivateRoute />}>
         <Route element={<Layout />}>
-          <Route index element={<Navigate to="/home" replace />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/notification" element={<NotificationPage />} />

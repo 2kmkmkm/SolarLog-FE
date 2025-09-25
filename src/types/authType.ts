@@ -1,5 +1,5 @@
 export type AuthState = {
-  token: string | null | undefined;
+  token: string | null;
   userId: string | null;
   installLocation: string | null;
   isLoading: boolean;
