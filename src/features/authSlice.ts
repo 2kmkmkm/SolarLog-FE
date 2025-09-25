@@ -19,7 +19,7 @@ const authSlice = createSlice({
       state.installLocation = action.payload.installLocation;
     },
     clearToken(state) {
-      state.token = undefined;
+      state.token = null;
       state.userId = null;
       state.installLocation = null;
       localStorage.removeItem("token");
