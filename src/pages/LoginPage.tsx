@@ -2,12 +2,15 @@ import Button from "@components/common/Button";
 import LoginInput from "@components/login/LoginInput";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import { useAppDispatch } from "@hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 import { login } from "@features/authThunk";
+import { ClipLoader } from "react-spinners";
 
 export default function LoginPage() {
   const nav = useNavigate();
   const dispatch = useAppDispatch();
+
+  const { isLoading } = useAppSelector((state) => state.auth);
 
   const [userId, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -77,7 +80,12 @@ export default function LoginPage() {
             >
               {error}
             </div>
-            <Button label="로그인" type="submit" />
+            <Button
+              label={
+                isLoading ? <ClipLoader color="#ffffff" size={20} /> : "로그인"
+              }
+              type="submit"
+            />
             <button
               className="body3_bold text-lightgray"
               onClick={() => nav("/signup")}

@@ -8,6 +8,7 @@ import { getCheckedId, postSignup } from "@apis/user";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
+import Modal from "@components/common/Modal";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -24,10 +25,10 @@ export default function SignupPage() {
   });
 
   const [confirmedPassword, setConfirmedPassword] = useState("");
-
   const [isUserIdChecked, setIsUserIdChecked] = useState(false);
-  const [isUserIdCheckedAlert, setIsUserIdCheckedAlert] = useState(false);
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [contents, setContents] = useState("");
 
   const userIdRef = useRef<HTMLInputElement>(null);
   const nav = useNavigate();
@@ -36,11 +37,13 @@ export default function SignupPage() {
     mutationFn: postSignup,
     onSuccess: (res) => {
       if (res.success) {
-        alert(res.message);
+        setContents(res.message);
         nav("/login");
       } else {
-        alert(res.message);
+        setContents(res.message);
       }
+
+      setIsOpen(true);
     },
     onError: () => {
       alert("서버 오류가 발생했습니다.");
@@ -52,12 +55,12 @@ export default function SignupPage() {
     onSuccess: (res) => {
       if (res.success) {
         setIsUserIdChecked(true);
-        setIsUserIdCheckedAlert(false);
-        alert(res.message);
+        setContents(res.message);
       } else {
         setIsUserIdChecked(false);
-        alert(res.message);
+        setContents(res.message);
       }
+      setIsOpen(true);
     },
     onError: () => {
       setIsUserIdChecked(false);
@@ -73,7 +76,8 @@ export default function SignupPage() {
     e.preventDefault();
 
     if (!userId) {
-      alert("아이디를 입력해주세요.");
+      setContents("아이디를 입력하세요");
+      setIsOpen(true);
       return;
     }
 
@@ -91,7 +95,6 @@ export default function SignupPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
     if (name === "userId") {
       setIsUserIdChecked(false);
-      setIsUserIdCheckedAlert(false);
     }
   };
 
@@ -103,7 +106,6 @@ export default function SignupPage() {
     e.preventDefault();
 
     if (!isUserIdChecked) {
-      setIsUserIdCheckedAlert(true);
       userIdRef.current?.focus();
       return;
     }
@@ -147,11 +149,6 @@ export default function SignupPage() {
                   onClick={(e) => handleCheckUserId(e, form.userId)}
                 />
               </div>
-              {isUserIdCheckedAlert && (
-                <span className="body2 text-red ml-1">
-                  아이디 중복 확인을 완료해주세요
-                </span>
-              )}
             </div>
             <LabelInput
               label="비밀번호"
@@ -253,10 +250,9 @@ export default function SignupPage() {
           }
           className="mt-10"
           type="submit"
-        >
-          안녕
-        </Button>
+        />
       </form>
+      {isOpen && <Modal contents={contents} isOpen={() => setIsOpen(false)} />}
     </>
   );
 }

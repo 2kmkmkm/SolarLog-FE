@@ -14,7 +14,9 @@ export default function Button({
       className={`w-full flex justify-center items-center bg-main disabled:bg-gray
       ${modal ? "h-9 max-w-40 rounded-xl" : "h-11 rounded-2xl"}`}
     >
-      <div className="heading2 text-white">{label}</div>
+      <div className="heading2 text-white flex justify-center items-center">
+        {label}
+      </div>
     </button>
   );
 }

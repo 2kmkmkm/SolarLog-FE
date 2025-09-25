@@ -34,6 +34,8 @@ export default function RQProvider({
           onError: (error) => {
             console.error("Global Query Error: ", error);
             if (isAxiosError(error) && error.response) {
+              // 401은 인터셉터에서 처리 → 여기선 무시
+              if (error.response.status === 401) return;
               setErrorStatus(error.response.status);
             }
           },
@@ -52,6 +54,9 @@ export default function RQProvider({
   useEffect(() => {
     if (errorStatus) {
       switch (errorStatus) {
+        case 401:
+          nav("/login");
+          break;
         case 404:
           nav("/notfound");
           break;
