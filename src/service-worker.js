@@ -32,6 +32,8 @@ const messaging = firebase.messaging();
 // FCM 백그라운드 알림
 messaging.onBackgroundMessage((payload) => {
   const { eventType, eventDetail, alarmId } = payload.data;
+  console.log("FCM 알림: ", payload);
+
   self.registration.showNotification(`${eventType} 감지`, {
     body: `${eventDetail}이 감지되었습니다`,
     icon: "/maskable_icon_x192.png",
