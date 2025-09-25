@@ -10,7 +10,6 @@ import DetectionPage from "@pages/DetectionPage";
 import NotFoundPage from "@pages/NotFoundPage";
 import PublicRoute from "@routes/PublicRoute";
 import PrivateRoute from "@routes/PrivateRoute";
-import ErrorPage from "@pages/ErrorPage";
 
 export default function AppRoutes() {
   return (
@@ -28,9 +27,8 @@ export default function AppRoutes() {
           <Route path="/my" element={<MyPage />} />
         </Route>
         <Route path="/detection/:alarmId" element={<DetectionPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route path="/500" element={<ErrorPage />} />
-      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
