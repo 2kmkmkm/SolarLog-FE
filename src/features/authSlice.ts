@@ -3,7 +3,7 @@ import type { AuthState } from "../types/authType";
 import { login } from "./authThunk";
 
 const initialState: AuthState = {
-  token: undefined,
+  token: null,
   userId: null,
   installLocation: null,
   isLoading: false,
@@ -19,7 +19,7 @@ const authSlice = createSlice({
       state.installLocation = action.payload.installLocation;
     },
     clearToken(state) {
-      state.token = null;
+      state.token = undefined;
       state.userId = null;
       state.installLocation = null;
       localStorage.removeItem("token");

@@ -54,11 +54,14 @@ export default function RQProvider({
   useEffect(() => {
     if (errorStatus) {
       switch (errorStatus) {
+        case 401:
+          nav("/login");
+          break;
         case 404:
           nav("/notfound");
           break;
         case 500:
-          nav("/500");
+          alert("서버 에러가 발생했습니다. 다시 시도해주세요.");
           console.log(errorStatus);
           break;
         default:
