@@ -41,8 +41,11 @@ export default function DetectionPage() {
               {formatIsoToDotDay(detection.alarmDate)}
             </div>
             <div className="body2 text-darkgray text-center">
-              패널에 <span className="text-red">{detection.eventDetail}</span>이
-              발생했습니다.
+              패널에{" "}
+              <span className="body2_bold text-sub">
+                {detection.eventDetail}
+              </span>
+              이 발생했습니다.
             </div>
           </div>
 
