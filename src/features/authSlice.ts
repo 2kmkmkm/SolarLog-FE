@@ -3,10 +3,10 @@ import type { AuthState } from "../types/authType";
 import { login } from "./authThunk";
 
 const initialState: AuthState = {
-  token: null,
+  token: undefined,
   userId: null,
   installLocation: null,
-  isLoading: false
+  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -19,26 +19,26 @@ const authSlice = createSlice({
       state.installLocation = action.payload.installLocation;
     },
     clearToken(state) {
-      state.token = null;
+      state.token = undefined;
       state.userId = null;
       state.installLocation = null;
       localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
-    builder.
-      addCase(login.pending, (state)=>{
+    builder
+      .addCase(login.pending, (state) => {
         state.isLoading = true; // 로그인 시작
-      }).
-      addCase(login.fulfilled, (state, action) => {
+      })
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false; // 로그인 성공
         state.token = action.payload.token;
         state.userId = action.payload.userId;
         state.installLocation = action.payload.installLocation;
       })
       .addCase(login.rejected, (state) => {
-        state.isLoading = false // 로그인 실패
-      })
+        state.isLoading = false; // 로그인 실패
+      });
   },
 });
 
