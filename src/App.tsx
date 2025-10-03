@@ -3,15 +3,18 @@ import { onForegroundMessage, requestFcmToken } from "@utils/firebase";
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 import { useEffect, useState } from "react";
 import { decodeToken } from "@utils/decodeToken";
-import { setToken } from "@features/authSlice";
+import { finishInit, setToken } from "@features/authSlice";
 import { postFCMToken } from "@apis/detection";
 import AppRoutes from "./AppRoutes";
 import Modal from "@components/common/Modal";
+import LoadingScreen from "@components/common/LoadingScreen";
 
 function App() {
   const nav = useNavigate();
   const dispatch = useAppDispatch();
-  const { token: authToken } = useAppSelector((state) => state.auth);
+  const { token: authToken, initialized } = useAppSelector(
+    (state) => state.auth
+  );
 
   const [alarmId, setAlarmId] = useState<string | null>(null);
   const [contents, setContents] = useState("");
@@ -28,6 +31,8 @@ function App() {
           installLocation: payload.installLocation,
         })
       );
+    } else {
+      dispatch(finishInit());
     }
   }, [dispatch]);
 
@@ -63,6 +68,11 @@ function App() {
     setIsOpen(false);
     setAlarmId(null);
   };
+
+  // 아직 토큰 복구 안 끝났으면 아무것도 안 그림
+  if (!initialized) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>

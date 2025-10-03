@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import SignupPage from "@pages/SignupPage";
@@ -21,7 +21,6 @@ export default function AppRoutes() {
       </Route>
       <Route element={<PrivateRoute />}>
         <Route element={<Layout />}>
-          <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/notification" element={<NotificationPage />} />
