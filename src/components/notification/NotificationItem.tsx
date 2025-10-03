@@ -35,6 +35,9 @@ export default function NotificationItem({
     nav(`/detection/${alarmId}`);
   };
 
+  let type = "이";
+  if (eventDetail === "먼지") type = "가";
+
   return (
     <button
       onClick={handleItemClick}
@@ -55,7 +58,8 @@ export default function NotificationItem({
       <div className="flex whitespace-nowrap  w-full">
         <span className="body2_bold text-green">{modelName}</span>
         <span className="body2 text-darkgray truncate">
-          에 {eventDetail}이 감지되었습니다
+          에 {eventDetail}
+          {type} 감지되었습니다
         </span>
       </div>
     </button>
