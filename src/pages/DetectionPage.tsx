@@ -28,6 +28,9 @@ export default function DetectionPage() {
 
   if (!detection) return null;
 
+  let type = "이";
+  if (detection.eventDetail === "먼지") type = "가";
+
   console.log(detection);
 
   return (
@@ -45,7 +48,7 @@ export default function DetectionPage() {
               <span className="body2_bold text-sub">
                 {detection.eventDetail}
               </span>
-              이 발생했습니다.
+              {type} 발생했습니다.
             </div>
           </div>
 

@@ -3,4 +3,5 @@ export type AuthState = {
   userId: string | null;
   installLocation: string | null;
   isLoading: boolean;
+  initialized: boolean
 };
