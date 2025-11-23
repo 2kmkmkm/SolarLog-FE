@@ -19,7 +19,7 @@ export default function InstallationInfoBox() {
       <div className="heading1 text-sub">설치 정보</div>
       <Row label="설치일" unit={formatIsoToDotDate(installation.installDate)} />
       <Row label="설치 위치" unit={installation.installLocation} />
-      <Row label="최초 출력값" unit={`${installation.initialPower} kw`} />
+      <Row label="최초 출력값" unit={`${installation.initialPower} W`} />
     </Box>
   );
 }

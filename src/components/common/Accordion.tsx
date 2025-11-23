@@ -7,7 +7,7 @@ type AccordionProps = {
 };
 
 export default function Accordion({ title, children }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
     <div>

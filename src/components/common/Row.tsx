@@ -2,7 +2,7 @@ import Information from "./Information";
 
 type RowProps = {
   label: string;
-  num?: number;
+  num?: number | string;
   unit: string | number;
   status?: "-" | "정상" | "주의" | "교체 필요";
   info?: string;
@@ -21,7 +21,7 @@ export default function Row({ label, num, unit, status, info }: RowProps) {
       </span>
       <div className="flex items-center gap-1.5">
         <div className="flex items-center gap-0.5">
-          <span className="body2_bold text-green">{num}</span>
+          <span className="body2_bold text-green">{num?.toLocaleString()}</span>
           <span className="body2 text-darkgray">{unit}</span>
         </div>
         {status && (

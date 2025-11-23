@@ -63,13 +63,19 @@ export default function TodayGeneration() {
       <div className="flex items-center justify-between">
         <span className="body2 text-darkgray mx-1">누적 발전량</span>
         <div className="space-x-1">
-          <span className="heading2 text-green">{cumulativePower}</span>
-          <span className="body2 text-darkgray">MWh</span>
+          <span className="heading2 text-green">
+            {cumulativePower.toLocaleString()}
+          </span>
+          <span className="body2 text-darkgray">Wh</span>
         </div>
       </div>
       <GreenBox>
-        <Row label="현재 출력값" num={power} unit="kW" />
-        <Row label="총 발전량" num={totalDailyPower} unit="kWh" />
+        <Row label="현재 출력값" num={Number(power.toFixed(1))} unit="W" />
+        <Row
+          label="총 발전량"
+          num={Number(totalDailyPower.toFixed(1))}
+          unit="Wh"
+        />
       </GreenBox>
     </Box>
   );

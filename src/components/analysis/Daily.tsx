@@ -48,11 +48,11 @@ export default function Daily() {
             <span className="body3_bold text-gray">전일 대비</span>
             {generation.dayCompared > 0 ? (
               <span className="body3 text-pink">
-                ▲ +{generation.dayCompared}%
+                ▲ +{generation.dayCompared.toFixed(1)}%
               </span>
             ) : generation.dayCompared < 0 ? (
               <span className="body3 text-blue">
-                ▼ {Math.abs(generation.dayCompared)}%
+                ▼ {Math.abs(generation.dayCompared).toFixed(1)}%
               </span>
             ) : (
               <span className="body3 text-gray">- 0%</span>
@@ -65,13 +65,21 @@ export default function Daily() {
             num={generation.peakPowerTime}
             unit="시"
           />
-          <Row label="최고 출력량" num={generation.peakPower} unit="kW" />
-          <Row label="총 발전량" num={generation.totalDailyPower} unit="kW" />
+          <Row
+            label="최고 출력량"
+            num={generation.peakPower.toFixed(1)}
+            unit="W"
+          />
+          <Row
+            label="총 발전량"
+            num={generation.totalDailyPower.toFixed(1)}
+            unit="W"
+          />
           <Row
             label="CO₂ 절감량"
-            num={generation.co2Reduction}
+            num={generation.co2Reduction.toFixed(1)}
             unit="kg"
-            info="발전량(kWh) × 배출계수(kgCO₂/kWh)"
+            info="발전량(Wh) × 배출계수(kgCO₂/Wh)"
           />
         </GreenBox>
       </div>
