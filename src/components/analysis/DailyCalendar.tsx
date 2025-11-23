@@ -9,8 +9,6 @@ import {
   differenceInCalendarDays,
   isSameDay,
   isSameMonth,
-  subMonths,
-  addMonths,
   subDays,
 } from "date-fns";
 import {
@@ -60,7 +58,7 @@ export default function DailyCalendar({
 
   // 이전 달로 이동
   const handlePrevMonth = useCallback(() => {
-    setCurrentDate(subMonths(currentDate, 1));
+    setCurrentDate(subDays(currentDate, 1));
   }, [currentDate, setCurrentDate]);
 
   // 다음 달로 이동
@@ -70,7 +68,7 @@ export default function DailyCalendar({
       (currentDate.getFullYear() === currentYear &&
         currentDate.getMonth() < currentMonthIndex)
     )
-      setCurrentDate(addMonths(currentDate, 1));
+      setCurrentDate(addDays(currentDate, 1));
   }, [currentDate, setCurrentDate, currentYear, currentMonthIndex]);
 
   const selectedYear = format(currentDate, "yyyy년");

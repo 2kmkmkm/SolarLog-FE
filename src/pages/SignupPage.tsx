@@ -231,7 +231,7 @@ export default function SignupPage() {
               )}
             </div>
             <LabelInput
-              label="최초 출력값 (kW)"
+              label="최초 출력값 (W)"
               type="number"
               value={form.initialPower ?? ""}
               name="initialPower"
