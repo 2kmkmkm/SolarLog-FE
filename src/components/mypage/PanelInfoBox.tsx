@@ -28,7 +28,7 @@ export default function PanelInfoBox() {
         label="잔여 수명"
         num={leftLife}
         unit=""
-        info="잔여 수명 공식 추후에 추가"
+        info="(현재 성능 - 80% 임계치) / 월별 평균 저하율"
       />
     </Box>
   );
